@@ -33,8 +33,8 @@ RUN /root/.rbenv/plugins/ruby-build/install.sh
 ENV PATH /root/.rbenv/bin:$PATH
 RUN echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh # or /etc/profile
 RUN echo 'eval "$(rbenv init -)"' >> .bashrc
-RUN rbenv install 2.5.3
-RUN rbenv global 2.5.3
+RUN rbenv install 2.6.2
+RUN rbenv global 2.6.2
 RUN rbenv rehash
 
 RUN echo "gem: --no-document" > ~/.gemrc
