@@ -23,14 +23,14 @@ sudo curl -L https://raw.githubusercontent.com/docker/compose/1.23.2/contrib/com
 sudo chmod +x /usr/local/bin/docker-compose
 
 #########################
-# Pull/Build Dockerfile #
+# Pull/Build Dockerfile # (You choose!)
 #########################
 
 # PULL #
 docker pull drumsergio/genieacs
 
 # BUILD #
-docker build -f GenieACS.dockerfile .
+docker build -f GenieACS.dockerfile . -t drumsergio/genieacs
 
 #un -d -v /opt:/opt --name GenieACS GenieACS
 
@@ -41,6 +41,6 @@ docker build -f GenieACS.dockerfile .
 docker-compose up -d
 
 
-# Then: Change manually FS_HOSTNAME in /opt/genieacs/config/config.json
+# Then: Change manually FS_HOSTNAME to your local IP/hostname in /opt/genieacs/config/config.json
 
 
