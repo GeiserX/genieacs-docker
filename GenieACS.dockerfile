@@ -52,5 +52,6 @@ RUN /root/.rbenv/shims/rails db:migrate RAILS_ENV=development
 WORKDIR /opt
 RUN git clone https://github.com/DrumSergio/genieacs-services
 RUN cp genieacs-services/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN ln -s /usr/local/share/.config/yarn/global/node_modules/genieacs /opt
 
 CMD ["/usr/bin/supervisord","-c","/etc/supervisor/conf.d/supervisord.conf"]

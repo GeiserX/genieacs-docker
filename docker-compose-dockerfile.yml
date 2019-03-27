@@ -1,3 +1,5 @@
+# Use this file to build GenieACS dockerfile from source #
+
 version: "3"
 services:
 # Dockerfile here: https://github.com/docker-library/mongo/blob/6932ac255d29759af9a74c6931faeb02de0fe53e/4.0/Dockerfile
@@ -6,8 +8,8 @@ services:
         restart: always
         container_name: "mongo"
         environment:
-#            - MONGO_INITDB_ROOT_USERNAME=admin
-#            - MONGO_INITDB_ROOT_PASSWORD=acsdesk2018
+#            - MONGO_INITDB_ROOT_USERNAME=user
+#            - MONGO_INITDB_ROOT_PASSWORD=password
             - MONGO_DATA_DIR=/data/db
             - MONGO_LOG_DIR=/var/log/mongodb
         volumes:
@@ -17,6 +19,7 @@ services:
             - 27017
 
 # Dockerfile here: https://github.com/mongo-express/mongo-express-docker/blob/b089fe7708d9dd619d648a6ec226fe0175b27740/Dockerfile
+### WARNING: NOT RECOMMENDED TO RUN THIS SOFTWARE (mongo-express) IN PRODUCTION ENVIRONMENTS ###
     mongo-express: 
         image: mongo-express
         container_name: "mongo-express"
@@ -26,8 +29,8 @@ services:
         ports:
             - 8081:8081
         environment:
-#            - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
-#            - ME_CONFIG_MONGODB_ADMINPASSWORD=acsdesk2018
+#            - ME_CONFIG_MONGODB_ADMINUSERNAME=user
+#            - ME_CONFIG_MONGODB_ADMINPASSWORD=password
             - ME_CONFIG_MONGODB_SERVER=mongo
             - ME_CONFIG_BASICAUTH_USERNAME=admin
             - ME_CONFIG_BASICAUTH_PASSWORD=mongo2018
@@ -46,18 +49,5 @@ services:
             - "80:80"
         volumes:
             - /opt:/opt
-        
-#    genieacs-gui:
-#        depends_on:
-#            - 'mongo'
-#            - 'genieacs'
-#        build:
-#            context: .
-#            dockerfile: GenieACS-GUI.dockerfile
-#        container_name: "genieacs-gui"
-#        ports:
-#            - "80:80"
-#        volumes:
-#            - /opt/genieacs-gui:/opt/genieacs-gui
 
 
