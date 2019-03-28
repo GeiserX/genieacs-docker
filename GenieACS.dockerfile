@@ -40,7 +40,7 @@ RUN rbenv rehash
 RUN echo "gem: --no-document" > ~/.gemrc
 WORKDIR /opt/
 RUN git clone https://github.com/genieacs/genieacs-gui
-WORKDIR /opt/genieacs-gui/config
+WORKDIR /opt/genieacs-gui/config/
 RUN cp graphs-sample.json.erb graphs.json.erb
 RUN cp index_parameters-sample.yml index_parameters.yml 
 RUN cp summary_parameters-sample.yml summary_parameters.yml
@@ -48,12 +48,12 @@ RUN cp parameters_edit-sample.yml parameters_edit.yml
 RUN cp parameter_renderers-sample.yml parameter_renderers.yml 
 RUN cp roles-sample.yml roles.yml 
 RUN cp users-sample.yml users.yml
-RUN echo $(ls -lash)
+RUN echo $(ls)
 
+WORKDIR /opt/genieacs-gui/
 RUN /root/.rbenv/shims/gem install bundler
 RUN /root/.rbenv/shims/bundle
 RUN /root/.rbenv/shims/gem install rails
-WORKDIR /opt/genieacs-gui
 RUN grep -rl "ActiveRecord::Migration$" db | xargs sed -i 's/ActiveRecord::Migration/ActiveRecord::Migration[5.2]/g'
 RUN /root/.rbenv/shims/rails db:migrate RAILS_ENV=development
 
