@@ -48,6 +48,7 @@ RUN cp parameters_edit-sample.yml parameters_edit.yml
 RUN cp parameter_renderers-sample.yml parameter_renderers.yml 
 RUN cp roles-sample.yml roles.yml 
 RUN cp users-sample.yml users.yml
+RUN echo $(ls -lash)
 
 RUN /root/.rbenv/shims/gem install bundler
 RUN /root/.rbenv/shims/bundle
