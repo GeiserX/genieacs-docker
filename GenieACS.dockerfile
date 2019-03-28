@@ -40,14 +40,14 @@ RUN rbenv rehash
 RUN echo "gem: --no-document" > ~/.gemrc
 WORKDIR /opt/
 RUN git clone https://github.com/genieacs/genieacs-gui
-WORKDIR /opt/genieacs-gui
-RUN mv config/graphs-sample.json.erb config/graphs.json.erb
-RUN mv config/index_parameters-sample.yml config/index_parameters.yml 
-RUN mv config/summary_parameters-sample.yml config/summary_parameters.yml
-RUN mv config/parameters_edit-sample.yml config/parameters_edit.yml
-RUN mv config/parameter_renderers-sample.yml config/parameter_renderers.yml 
-RUN mv config/roles-sample.yml config/roles.yml 
-RUN mv config/users-sample.yml config/users.yml
+WORKDIR /opt/genieacs-gui/config
+RUN cp graphs-sample.json.erb graphs.json.erb
+RUN cp index_parameters-sample.yml index_parameters.yml 
+RUN cp summary_parameters-sample.yml summary_parameters.yml
+RUN cp parameters_edit-sample.yml parameters_edit.yml
+RUN cp parameter_renderers-sample.yml parameter_renderers.yml 
+RUN cp roles-sample.yml roles.yml 
+RUN cp users-sample.yml users.yml
 
 RUN /root/.rbenv/shims/gem install bundler
 RUN /root/.rbenv/shims/bundle
