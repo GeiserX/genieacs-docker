@@ -41,7 +41,13 @@ RUN echo "gem: --no-document" > ~/.gemrc
 WORKDIR /opt/
 RUN git clone https://github.com/genieacs/genieacs-gui
 WORKDIR /opt/genieacs-gui
-RUN mv config/graphs-sample.json.erb config/graphs.json.erb && mv config/index_parameters-sample.yml config/index_parameters.yml && mv config/summary_parameters-sample.yml config/summary_parameters.yml && mv config/parameters_edit-sample.yml config/parameters_edit.yml && mv config/parameter_renderers-sample.yml config/parameter_renderers.yml && mv config/roles-sample.yml config/roles.yml && mv config/users-sample.yml config/users.yml
+RUN mv config/graphs-sample.json.erb config/graphs.json.erb
+RUN mv config/index_parameters-sample.yml config/index_parameters.yml 
+RUN mv config/summary_parameters-sample.yml config/summary_parameters.yml
+RUN mv config/parameters_edit-sample.yml config/parameters_edit.yml
+RUN mv config/parameter_renderers-sample.yml config/parameter_renderers.yml 
+RUN mv config/roles-sample.yml config/roles.yml 
+RUN mv config/users-sample.yml config/users.yml
 
 RUN /root/.rbenv/shims/gem install bundler
 RUN /root/.rbenv/shims/bundle
