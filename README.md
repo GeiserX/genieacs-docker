@@ -4,7 +4,7 @@ Recommended Host Machine: Debian 9
 
 Machine preferably with 4GB or more. The rest can change
 
-## Install - (Just copy-paste this section)
+### Install
 
 ```bash
 apt update
@@ -22,7 +22,7 @@ sudo curl -L https://raw.githubusercontent.com/docker/compose/1.23.2/contrib/com
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
-## Pull/Build Dockerfile - (You choose!)
+### Pull/Build Dockerfile
 
 ```bash
 docker pull drumsergio/genieacs
@@ -32,7 +32,7 @@ or:
 docker build -f GenieACS.dockerfile . -t drumsergio/genieacs
 ```
 
-## Run Docker Compose - (You need to have in the same directory the docker-compose.yml)
+### Run Docker Compose
 
 ```bash
 docker-compose up -d
