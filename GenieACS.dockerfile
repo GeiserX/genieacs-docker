@@ -52,6 +52,7 @@ RUN cp users-sample.yml users.yml
 RUN /root/.rbenv/shims/gem install bundler
 RUN /root/.rbenv/shims/bundle
 RUN /root/.rbenv/shims/gem install rails
+WORKDIR /opt/genieacs-gui/config/db/migrate
 RUN grep -rl "ActiveRecord::Migration$" *.rb | xargs sed -i 's/ActiveRecord::Migration/ActiveRecord::Migration[5.2]/g'
 RUN /root/.rbenv/shims/rails db:migrate RAILS_ENV=development
 
