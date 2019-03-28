@@ -39,6 +39,7 @@ docker-compose up -d
 docker-compose down # To shut it down!
 ```
 
-Change manually FS_HOSTNAME to your local IP/hostname in /opt/genieacs/config/config.json and also change manually user/passwords in /opt/genieacs/config/users.yml
+Change manually `FS_HOSTNAME` to your local IP/hostname in `/opt/genieacs/config/config.json` and also change manually user/passwords in `/opt/genieacs/config/users.yml`
 
-If you want a personalized version of GenieACS-GUI, you could change the Dockerfile and pull from your own repo. See my repo https://github.com/DrumSergio/genieacs-gui
+If you want a personalized version of GenieACS-GUI, you could change the Dockerfile and pull from your own repo. See my repo https://github.com/DrumSergio/genieacs-gui you could also change more things like enabling SSL in the 4 servers. You have commented lines on the Dockerfile that can give you some clues.
+
