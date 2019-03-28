@@ -1,4 +1,4 @@
-# GenieACS-Docker
+# Docker Compose and Dockerfile files for GenieACS
 
 Recommended Host Machine: Debian 9
 
