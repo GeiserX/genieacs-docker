@@ -40,6 +40,6 @@ docker-compose up -d
 If you need to stop it: docker-compose down
 
 
-Then: Change manually FS_HOSTNAME to your local IP/hostname in /opt/genieacs/config/config.json
+*Then: Change manually FS_HOSTNAME to your local IP/hostname in /opt/genieacs/config/config.json
 
-Also: Change manually user/passwords in /opt/genieacs/config/users.yml
+*Also: Change manually user/passwords in /opt/genieacs/config/users.yml
