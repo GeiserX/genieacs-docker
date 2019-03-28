@@ -32,15 +32,12 @@ docker pull drumsergio/genieacs
 # BUILD #
 docker build -f GenieACS.dockerfile . -t drumsergio/genieacs
 
-#un -d -v /opt:/opt --name GenieACS GenieACS
-
 ######################
 # Run Docker Compose # (You need to have in the same directory the docker-compose.yml)
 ######################
 
 docker-compose up -d
 
-
 # Then: Change manually FS_HOSTNAME to your local IP/hostname in /opt/genieacs/config/config.json
-
+# Also: Change manually user/passwords in /opt/genieacs/config/users.yml
 
