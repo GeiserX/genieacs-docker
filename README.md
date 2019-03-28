@@ -4,7 +4,7 @@ Recommended Host Machine: Debian 9
 
 Machine preferably with 4GB or more. The rest can change
 
-### Install
+### Install Docker-CE and Docker Compose
 
 ```bash
 apt update
