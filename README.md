@@ -39,6 +39,6 @@ docker-compose down # To shut it down!
 
 Change manually `FS_HOSTNAME` to your local IP/hostname in `/opt/genieacs/config/config.json` and also change manually user/passwords in `/opt/genieacs/config/users.yml`
 
-If you want a personalized version of GenieACS-GUI, you could change the Dockerfile and pull from your own repo. See my repo https://github.com/DrumSergio/genieacs-gui you could also change more things like enabling SSL in the 4 servers. You have commented lines on the Dockerfile that can give you some clues.
+If you want a personalized version of GenieACS-GUI, you could change the Dockerfile and pull from your own repo. See my repo https://github.com/DrumSergio/genieacs-gui you could also change more things like enabling SSL in all the services. You have commented lines on the Dockerfile that can give you some clues. You can have more info also at the Wiki of the GenieACS project.
 
-Wiki in the GenieACS Github repo: https://github.com/genieacs/genieacs/wiki/Docker-Installation-with-Docker-Compose
+This repo appears in the GenieACS Wiki: https://github.com/genieacs/genieacs/wiki/Docker-Installation-with-Docker-Compose
