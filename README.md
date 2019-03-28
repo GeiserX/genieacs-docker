@@ -36,10 +36,9 @@ docker build -f GenieACS.dockerfile . -t drumsergio/genieacs
 
 ```bash
 docker-compose up -d
+docker-compose down # To shut it down!
 ```
-If you need to stop it: docker-compose down
 
+Change manually FS_HOSTNAME to your local IP/hostname in /opt/genieacs/config/config.json and also change manually user/passwords in /opt/genieacs/config/users.yml
 
-*Then: Change manually FS_HOSTNAME to your local IP/hostname in /opt/genieacs/config/config.json
-
-*Also: Change manually user/passwords in /opt/genieacs/config/users.yml
+If you want a personalized version of GenieACS-GUI, you could change the Dockerfile and pull from your own repo. See my repo https://github.com/DrumSergio/genieacs-gui
