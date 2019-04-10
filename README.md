@@ -25,11 +25,11 @@ cd /opt && git clone https://github.com/DrumSergio/GenieACS-Docker
 ### Pull/Build Dockerfile
 
 ```bash
-docker pull drumsergio/genieacs
+docker pull drumsergio/genieacs:1.1.3
 ```
 or:
 ```bash
-docker build -f GenieACS.dockerfile . -t drumsergio/genieacs
+docker build -f GenieACS.dockerfile . -t drumsergio/genieacs:1.1.3
 ```
 
 ### Run Docker Compose
