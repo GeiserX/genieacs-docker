@@ -33,21 +33,13 @@ RUN /root/.rbenv/plugins/ruby-build/install.sh
 ENV PATH /root/.rbenv/bin:$PATH
 RUN echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh # or /etc/profile
 RUN echo 'eval "$(rbenv init -)"' >> .bashrc
-RUN rbenv install 2.6.2
-RUN rbenv global 2.6.2
-RUN rbenv rehash
+RUN rbenv install 2.6.2 && rbenv global 2.6.2 && rbenv rehash
 
 RUN echo "gem: --no-document" > ~/.gemrc
 WORKDIR /opt/
 RUN git clone https://github.com/genieacs/genieacs-gui
 WORKDIR /opt/genieacs-gui/config/
-RUN cp graphs-sample.json.erb graphs.json.erb
-RUN cp index_parameters-sample.yml index_parameters.yml 
-RUN cp summary_parameters-sample.yml summary_parameters.yml
-RUN cp parameters_edit-sample.yml parameters_edit.yml
-RUN cp parameter_renderers-sample.yml parameter_renderers.yml 
-RUN cp roles-sample.yml roles.yml 
-RUN cp users-sample.yml users.yml
+RUN cp graphs-sample.json.erb graphs.json.erb && cp index_parameters-sample.yml index_parameters.yml && cp summary_parameters-sample.yml summary_parameters.yml && cp parameters_edit-sample.yml parameters_edit.yml && cp parameter_renderers-sample.yml parameter_renderers.yml && cp roles-sample.yml roles.yml && cp users-sample.yml users.yml
 
 WORKDIR /opt/genieacs-gui/
 RUN /root/.rbenv/shims/gem install bundler
