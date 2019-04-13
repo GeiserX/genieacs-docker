@@ -49,4 +49,4 @@ For this setting to work, you need Vagrant installed on your computer https://ww
 
 Then, you simply issue the command `vagrant up` in the directory where the Vagrantfile is.
 
-This repo appears in the GenieACS Wiki: https://github.com/genieacs/genieacs/wiki/Docker-Installation-with-Docker-Compose
+##### This repo appears in the GenieACS Wiki: https://github.com/genieacs/genieacs/wiki/Docker-Installation-with-Docker-Compose
