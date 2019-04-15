@@ -43,9 +43,9 @@ Change manually `FS_HOSTNAME` to your local IP/hostname in `/opt/genieacs/config
 If you want a personalized version of GenieACS-GUI, you could change the Dockerfile and pull from your own repo. See my repo https://github.com/DrumSergio/genieacs-gui you could also change more things like enabling SSL in all the services. You have commented lines on the Dockerfile that can give you some clues. You can have more info also at the Wiki of the GenieACS project.
 
 ### Use of the Vagrantfile
-If you want to use GenieACS inside a VM you have a Vagrantfile ready to be deployed in VirtualBox. Although the use of Vagrant alongside VirtualBox is more development-oriented, it can be used along with your Hyper-V or VMware too, if you change the Vagranfile accordingly.
+If you want to use GenieACS inside a VM you have a Vagrantfile ready to be deployed in VirtualBox. Although the use of Vagrant alongside VirtualBox is more development-oriented, it can be used along with your private Hyper-V or VMware cluster too, if you change the Vagranfile accordingly.
 
-For this setting to work, you need Vagrant installed on your computer https://www.vagrantup.com/docs/installation/ and of course, VirtualBox https://www.virtualbox.org/wiki/Downloads
+For this setting to work, you need Vagrant installed on your computer https://www.vagrantup.com/docs/installation/ and of course, VirtualBox if you decide to use this provider with the Vagrantfile I provided https://www.virtualbox.org/wiki/Downloads
 
 Then, you simply issue the command `vagrant up` in the directory where the Vagrantfile is.
 
