@@ -1,6 +1,7 @@
 # Docker Compose and Dockerfile files for GenieACS
 
 Recommended Host Machine: Debian 9 with 4GB of RAM or more.
+**Please**, modify the `docker-compose.yml` file accordingly if you plan to deploy into production.
 
 ### Install Docker-CE and Docker Compose
 
