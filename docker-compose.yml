@@ -45,8 +45,8 @@ services:
             - "7557:7557"
             - "7567:7567"
             - "80:80"
-#        volumes:
-#            - /opt:/opt
+        volumes:
+            - /opt:/opt
         
 
 
