@@ -13,8 +13,8 @@ services:
             - MONGO_DATA_DIR=/data/db
             - MONGO_LOG_DIR=/var/log/mongodb
         volumes:
-            - /data/db:/data/db
-            - /data/configdb:/data/configdb
+            - data_db:/data/db
+            - data_configdb:/data/configdb
         expose: 
             - 27017
 
@@ -45,8 +45,12 @@ services:
             - "7557:7557"
             - "7567:7567"
             - "80:80"
-#        volumes:
-#            - /opt:/opt
+        volumes:
+            - opt_volume:/opt
         
+volumes:
+    data_db:
+    data_configdb:
+    opt_volume:
 
 
