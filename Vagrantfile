@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
     vb.name = "GenieACS_Vagrant_Docker"
   end
 
-#### Docker way
+#  ### Local Docker way ###
 #  config.vm.provision "docker" do |d|
 #    d.run "mongo:4.0",
 #      args: "--name 'mongo' -v 'data_db:/data/db' -v 'data_configdb:/data/configdb' --expose 27017 --env 'MONGO_DATA_DIR=/data/db' --env 'MONGO_LOG_DIR=/var/log/mongodb'"
