@@ -42,7 +42,7 @@ docker-compose up -d
 
 Change manually `FS_HOSTNAME` to your local IP/hostname in `/opt/genieacs/config/config.json` and also change manually user/passwords in `/opt/genieacs-gui/config/users.yml`. In order to do that, you need to be inside of the container. That is done issuing the command `docker exec -it genieacs /bin/bash`. If you happen to be managing this setting in your company, better to have some knowledge of Docker.
 
-If you want a personalized version of GenieACS-GUI, you could change the Dockerfile and pull from your own repo. See my repo https://github.com/DrumSergio/genieacs-gui you could also change more things like enabling SSL in all the services. You have commented lines on the Dockerfile that can give you some clues. You can have more info also at the Wiki of the GenieACS project.
+If you want a personalized version of GenieACS-GUI, you could change the Dockerfile and pull from your own repo. See my repo https://github.com/DrumSergio/genieacs-gui you could also change more things like enabling SSL in all the services. You have commented lines on the Dockerfile that can give you some clues. You can find more info also at the Wiki of the GenieACS project.
 
 ### Use of the Vagrantfile
 If you want to use GenieACS inside a VM you have a Vagrantfile ready to be deployed in VirtualBox. Although the use of Vagrant alongside VirtualBox is more development-oriented, it can be used along with your private Hyper-V or VMware cluster too, if you change the Vagranfile accordingly.
