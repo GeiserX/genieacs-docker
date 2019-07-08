@@ -4,7 +4,7 @@ Tested against Debian 10 and CentOS 7. Strongly recommended to install it in a m
 
 **Please**, modify the `docker-compose.yml` file accordingly if you plan to deploy into production. Comment out the `volumes:` directive if you encounter problems in the installation.
 
-### Install Docker-CE and Docker Compose in Debian 10
+### Install Docker-CE and Docker Compose (Only for Debian 10)
 
 ```bash
 apt update
@@ -22,6 +22,20 @@ curl -L https://raw.githubusercontent.com/docker/compose/1.24.1/contrib/completi
 chmod +x /usr/local/bin/docker-compose
 
 cd /opt && git clone https://github.com/DrumSergio/GenieACS-Docker && cd GenieACS-Docker
+```
+
+### Install Docker-CE and Docker Compose (Only for CentOS 7)
+
+```
+yum update -y
+yum install yum-utils device-mapper-persistent-data lvm2 -y
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+yum install docker-ce -y
+systemctl start docker
+systemctl enable docker
+
+curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
 ```
 
 ### Pull/Build Dockerfile
