@@ -4,7 +4,7 @@ Tested against Debian 10 and CentOS 7. Strongly recommended to install it in a m
 
 **Please**, modify the `docker-compose.yml` file accordingly if you plan to deploy into production. Comment out the `volumes:` directive if you encounter problems in the installation.
 
-### Install Docker-CE and Docker Compose on a Debian 10 machine
+### Install Docker-CE and Docker Compose in Debian 10
 
 ```bash
 apt update
