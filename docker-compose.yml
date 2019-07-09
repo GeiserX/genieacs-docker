@@ -20,20 +20,20 @@ services:
 
 # Dockerfile here: https://github.com/mongo-express/mongo-express-docker/blob/b089fe7708d9dd619d648a6ec226fe0175b27740/Dockerfile
 ### WARNING: NOT RECOMMENDED TO RUN THIS SOFTWARE (mongo-express) IN PRODUCTION ENVIRONMENTS ###
-    mongo-express: 
-        image: mongo-express
-        container_name: "mongo-express"
-        restart: always
-        depends_on:
-            - 'mongo'
-        ports:
-            - 8081:8081
-        environment:
-#            - ME_CONFIG_MONGODB_ADMINUSERNAME=user
-#            - ME_CONFIG_MONGODB_ADMINPASSWORD=password
-            - ME_CONFIG_MONGODB_SERVER=mongo
-            - ME_CONFIG_BASICAUTH_USERNAME=admin
-            - ME_CONFIG_BASICAUTH_PASSWORD=mongo2018
+#    mongo-express: 
+#        image: mongo-express
+#        container_name: "mongo-express"
+#        restart: always
+#        depends_on:
+#            - 'mongo'
+#        ports:
+#            - 8081:8081
+#        environment:
+##            - ME_CONFIG_MONGODB_ADMINUSERNAME=user
+##            - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+#            - ME_CONFIG_MONGODB_SERVER=mongo
+#            - ME_CONFIG_BASICAUTH_USERNAME=admin
+#            - ME_CONFIG_BASICAUTH_PASSWORD=mongo2018
 
     genieacs:
         depends_on:
