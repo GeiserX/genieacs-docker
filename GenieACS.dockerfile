@@ -26,27 +26,6 @@ RUN sed -i '0,/false/ s/false/true/' config.json ## Changes first occurence of "
 #RUN sed -i '8i\ \ "NBI_SSL" : true,' config.json
 #RUN sed -i '12i\ \ "FS_SSL" : true,' config.json
 
-# Install GenieACS-GUI #
-RUN git clone https://github.com/sstephenson/rbenv.git /root/.rbenv
-RUN git clone https://github.com/sstephenson/ruby-build.git /root/.rbenv/plugins/ruby-build
-RUN /root/.rbenv/plugins/ruby-build/install.sh
-ENV PATH /root/.rbenv/bin:$PATH
-RUN echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh # or /etc/profile
-RUN echo 'eval "$(rbenv init -)"' >> .bashrc
-RUN rbenv install 2.6.2 && rbenv global 2.6.2 && rbenv rehash
-
-RUN echo "gem: --no-document" > ~/.gemrc
-WORKDIR /opt/
-RUN git clone https://github.com/genieacs/genieacs-gui
-WORKDIR /opt/genieacs-gui/config/
-RUN cp graphs-sample.json.erb graphs.json.erb && cp index_parameters-sample.yml index_parameters.yml && cp summary_parameters-sample.yml summary_parameters.yml && cp parameters_edit-sample.yml parameters_edit.yml && cp parameter_renderers-sample.yml parameter_renderers.yml && cp roles-sample.yml roles.yml && cp users-sample.yml users.yml
-
-WORKDIR /opt/genieacs-gui/
-RUN /root/.rbenv/shims/gem install bundler
-RUN /root/.rbenv/shims/bundle
-RUN /root/.rbenv/shims/gem install rails
-RUN grep -rl "ActiveRecord::Migration$" db | xargs sed -i 's/ActiveRecord::Migration/ActiveRecord::Migration[5.2]/g'
-RUN /root/.rbenv/shims/rails db:migrate RAILS_ENV=development
 
 WORKDIR /opt
 RUN git clone https://github.com/DrumSergio/genieacs-services

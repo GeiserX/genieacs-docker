@@ -1,4 +1,4 @@
-# Docker Compose and Dockerfile files for GenieACS
+# Docker Compose and Dockerfile files for GenieACS 1.2
 
 Tested against Debian 10 and CentOS 7. Strongly recommended to install it in a machine with at least **4 GB of RAM** or more.
 
@@ -43,11 +43,11 @@ cd /opt && git clone https://github.com/DrumSergio/GenieACS-Docker && cd GenieAC
 ### Pull/Build Dockerfile
 
 ```bash
-docker pull drumsergio/genieacs:1.1.3
+docker pull drumsergio/genieacs:1.2.0
 ```
 or:
 ```bash
-docker build -f GenieACS.dockerfile . -t drumsergio/genieacs:1.1.3
+docker build -f GenieACS.dockerfile . -t drumsergio/genieacs:1.2.0
 ```
 
 ### Run Docker Compose
@@ -56,9 +56,7 @@ docker build -f GenieACS.dockerfile . -t drumsergio/genieacs:1.1.3
 docker-compose up -d
 ```
 
-Change manually `FS_HOSTNAME` to your local IP/hostname in `/opt/genieacs/config/config.json` and also change manually user/passwords in `/opt/genieacs-gui/config/users.yml`. In order to do that, you need to be inside of the container. That is done issuing the command `docker exec -it genieacs /bin/bash`. If you happen to be managing this setting in your company, better to have some knowledge of Docker.
-
-If you want a personalized version of GenieACS-GUI, you could change the Dockerfile and pull from your own repo. See my repo https://github.com/DrumSergio/genieacs-gui you could also change more things like enabling SSL in all the services. You have commented lines on the Dockerfile that can give you some clues. You can find more info also at the Wiki of the GenieACS project.
+Change manually `FS_HOSTNAME` to your local IP/hostname in `/opt/genieacs/config/config.json`. In order to do that, you need to be inside of the container. That is done issuing the command `docker exec -it genieacs /bin/bash`. If you happen to be managing this setting in your company, better to have some knowledge of Docker.
 
 ### Use of the Vagrantfile
 If you want to use GenieACS inside a VM you have a Vagrantfile ready to be deployed in VirtualBox. Although the use of Vagrant alongside VirtualBox is more development-oriented, it can be used along with your private Hyper-V or VMware cluster too, if you change the Vagranfile accordingly.
