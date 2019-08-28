@@ -5,7 +5,7 @@
 FROM node:10-buster
 LABEL maintainer="acsdesk@protonmail.com"
 
-RUN apt-get update && apt-get install -y sudo apt-transport-https apt-utils supervisor git
+RUN apt-get update && apt-get install -y sudo supervisor git
 RUN mkdir -p /var/log/supervisor
 
 #sudo npm install -g --unsafe-perm genieacs@1.2.0
