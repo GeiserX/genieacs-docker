@@ -8,8 +8,8 @@ services:
         restart: always
         container_name: "mongo"
         environment:
-#            - MONGO_INITDB_ROOT_USERNAME=user
-#            - MONGO_INITDB_ROOT_PASSWORD=password
+            - MONGO_INITDB_ROOT_USERNAME=userchange
+            - MONGO_INITDB_ROOT_PASSWORD=passwordchange
             - MONGO_DATA_DIR=/data/db
             - MONGO_LOG_DIR=/var/log/mongodb
         volumes:
@@ -38,7 +38,7 @@ services:
     genieacs:
         depends_on:
             - 'mongo'
-        image: drumsergio/genieacs:1.1.3
+        image: drumsergio/genieacs:1.2.0
         container_name: "genieacs"
         ports:
             - "7547:7547"
