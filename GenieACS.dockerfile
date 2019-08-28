@@ -1,34 +1,34 @@
-# GenieACS v1.1.3 Dockerfile #
+# GenieACS v1.2 Dockerfile #
 ##############################
 
 # Dockerfile of node:8-stretch here: https://github.com/nodejs/docker-node/blob/526c6e618300bdda0da4b3159df682cae83e14aa/8/stretch/Dockerfile
-FROM node:8-stretch
+FROM node:10-buster
 LABEL maintainer="acsdesk@protonmail.com"
 
-RUN apt-get update && apt-get install -y sudo apt-transport-https apt-utils supervisor
+RUN apt-get update && apt-get install -y sudo apt-transport-https apt-utils supervisor git
 RUN mkdir -p /var/log/supervisor
 
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-RUN apt-get update && apt-get install yarn -y
-RUN yarn global add genieacs@1.1.3 --exact
-RUN ln -s /usr/local/share/.config/yarn/global/node_modules/genieacs /opt
+#sudo npm install -g --unsafe-perm genieacs@1.2.0
+WORKDIR /opt
+RUN git clone https://github.com/genieacs/genieacs.git -b master
+WORKDIR /opt/genieacs
+RUN npm install
+RUN npm run build
 
-## Change config.json ##
-WORKDIR /opt/genieacs/config
-RUN openssl genrsa 2048 > cwmp.key
-RUN openssl req -new -x509 -days 10000 -key cwmp.key -subj "/C=ES/O=ACSdesk/emailAddress=acsdesk@protonmail.com" > cwmp.crt
-RUN cp cwmp.crt nbi.crt && cp cwmp.key nbi.key && cp cwmp.crt fs.crt && cp cwmp.key fs.key
-#RUN sed -i 's/mongodb:\/\/127.0.0.1\/genieacs/mongodb:\/\/user:password@127.0.0.1\/genieacs/' config.json
-RUN sed -i 's/mongodb:\/\/127.0.0.1\/genieacs/mongodb:\/\/mongo\/genieacs/' config.json
-RUN sed -i 's/acs.example.com/acs.local/' config.json
-RUN sed -i '0,/false/ s/false/true/' config.json ## Changes first occurence of "false" in SSL on CWMP
-#RUN sed -i '8i\ \ "NBI_SSL" : true,' config.json
-#RUN sed -i '12i\ \ "FS_SSL" : true,' config.json
+RUN useradd --system --no-create-home --user-group genieacs
+#RUN mkdir /opt/genieacs
+RUN mkdir /opt/genieacs/ext
+RUN chown genieacs:genieacs /opt/genieacs/ext
 
+ADD genieacs.env /opt/genieacs/genieacs.env
+RUN chown genieacs:genieacs /opt/genieacs/genieacs.env
+RUN chmod 600 /opt/genieacs/genieacs.env
+
+RUN mkdir /var/log/genieacs
+RUN chown genieacs:genieacs /var/log/genieacs
 
 WORKDIR /opt
-RUN git clone https://github.com/DrumSergio/genieacs-services
+RUN git clone https://github.com/DrumSergio/genieacs-services -b 1.2
 RUN cp genieacs-services/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 CMD ["/usr/bin/supervisord","-c","/etc/supervisor/conf.d/supervisord.conf"]
