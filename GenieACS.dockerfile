@@ -35,5 +35,6 @@ RUN cp genieacs-services/supervisord.conf /etc/supervisor/conf.d/supervisord.con
 RUN cp genieacs-services/run_with_env.sh /usr/bin/run_with_env.sh
 RUN chmod +x /usr/bin/run_with_env.sh
 
+WORKDIR /var/log/genieacs
 
 CMD ["/usr/bin/supervisord","-c","/etc/supervisor/conf.d/supervisord.conf"]
