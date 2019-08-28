@@ -8,8 +8,8 @@ services:
         restart: always
         container_name: "mongo"
         environment:
-            - MONGO_INITDB_ROOT_USERNAME=userchange
-            - MONGO_INITDB_ROOT_PASSWORD=passwordchange
+#            - MONGO_INITDB_ROOT_USERNAME=userchange
+#            - MONGO_INITDB_ROOT_PASSWORD=passwordchange
             - MONGO_DATA_DIR=/data/db
             - MONGO_LOG_DIR=/var/log/mongodb
         volumes:
