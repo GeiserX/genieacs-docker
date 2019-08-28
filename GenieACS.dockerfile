@@ -32,5 +32,6 @@ ADD genieacs.logrotate /etc/logrotate.d/genieacs
 WORKDIR /opt
 RUN git clone https://github.com/DrumSergio/genieacs-services -b 1.2
 RUN cp genieacs-services/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN cp genieacs-services/run_with_env.sh /etc/supervisor/conf.d/run_with_env.sh
 
 CMD ["/usr/bin/supervisord","-c","/etc/supervisor/conf.d/supervisord.conf"]
