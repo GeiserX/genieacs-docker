@@ -27,6 +27,8 @@ RUN chmod 600 /opt/genieacs/genieacs.env
 RUN mkdir /var/log/genieacs
 RUN chown genieacs:genieacs /var/log/genieacs
 
+ADD genieacs.logrotate /etc/logrotate.d/genieacs
+
 WORKDIR /opt
 RUN git clone https://github.com/DrumSergio/genieacs-services -b 1.2
 RUN cp genieacs-services/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
