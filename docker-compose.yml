@@ -17,6 +17,8 @@ services:
             - data_configdb:/data/configdb
         expose: 
             - 27017
+        networks:
+            - genieacs_network
 
 # Dockerfile here: https://github.com/mongo-express/mongo-express-docker/blob/b089fe7708d9dd619d648a6ec226fe0175b27740/Dockerfile
 ### WARNING: NOT RECOMMENDED TO RUN THIS SOFTWARE (mongo-express) IN PRODUCTION ENVIRONMENTS ###
@@ -47,10 +49,13 @@ services:
             - "80:80"
         volumes:
             - opt_volume:/opt
+        networks:
+            - genieacs_network
         
 volumes:
     data_db:
     data_configdb:
     opt_volume:
 
-
+networks:
+    genieacs_network:
