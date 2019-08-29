@@ -56,7 +56,7 @@ docker build -f GenieACS.dockerfile . -t drumsergio/genieacs:1.2.0
 docker-compose up -d
 ```
 
-Change manually `FS_HOSTNAME` to your local IP/hostname in `/opt/genieacs/config/config.json`. In order to do that, you need to be inside of the container. That is done issuing the command `docker exec -it genieacs /bin/bash`. If you happen to be managing this setting in your company, better to have some knowledge of Docker.
+To log into the container, issue the command `docker exec -it genieacs /bin/bash`. If you happen to be managing this setting in your company, better to have some knowledge of Docker.
 
 ### Use of the Vagrantfile
 If you want to use GenieACS inside a VM you have a Vagrantfile ready to be deployed in VirtualBox. Although the use of Vagrant alongside VirtualBox is more development-oriented, it can be used along with your private Hyper-V or VMware cluster too, if you change the Vagranfile accordingly.
