@@ -1,6 +1,6 @@
 # Docker Compose and Dockerfile files for GenieACS 1.2
 
-GenieACS 1.2 tested against Debian 10 and CentOS 7. Strongly recommended to install it in a machine with at least **4 GB of RAM** or more.
+GenieACS 1.2 tested against Debian 10, CentOS 7 and QNAP QTS 4.3. Strongly recommended to install it in a machine with at least **4 GB of RAM** or more.
 
 **Please**, modify the `docker-compose.yml` file accordingly if you plan to deploy into production. Comment out the `volumes:` directive if you encounter problems in the installation.
 
@@ -53,6 +53,8 @@ docker build -f GenieACS.dockerfile . -t drumsergio/genieacs:1.2.0
 If you decide to build the dockerfile, do not change its name (tag). If you wish to modify it, change docker-compose.yml accordingly.
 
 ### Run Docker Compose
+
+If you deploy it in a QNAP's QTS then this is the only step needed after downloading `docker-compose.yml`:
 
 ```bash
 docker-compose up -d

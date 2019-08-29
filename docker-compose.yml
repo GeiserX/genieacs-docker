@@ -55,7 +55,7 @@ services:
         networks:
             - genieacs_network
 
-### THIS SERVICE IS NOT RECOMMENDED FOR PRODUCTION, JUST FOR TESTING PURPOSES ###
+### THIS SERVICE IS JUST FOR TESTING PURPOSES ###
 # Dockerfile here: https://hub.docker.com/r/drumsergio/genieacs-sim/dockerfile
     genieacs-sim:
         depends_on:
