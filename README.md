@@ -28,7 +28,7 @@ cd /opt && git clone https://github.com/DrumSergio/GenieACS-Docker && cd GenieAC
 
 ```
 yum update -y
-yum install yum-utils device-mapper-persistent-data lvm2 -y
+yum install yum-utils device-mapper-persistent-data lvm2 git -y
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 yum install docker-ce -y
 systemctl start docker
