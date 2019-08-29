@@ -1,6 +1,6 @@
 # Docker Compose and Dockerfile files for GenieACS 1.2
 
-Tested against Debian 10 and CentOS 7. Strongly recommended to install it in a machine with at least **4 GB of RAM** or more.
+GenieACS 1.2 tested against Debian 10 and CentOS 7. Strongly recommended to install it in a machine with at least **4 GB of RAM** or more.
 
 **Please**, modify the `docker-compose.yml` file accordingly if you plan to deploy into production. Comment out the `volumes:` directive if you encounter problems in the installation.
 
@@ -50,6 +50,8 @@ or:
 docker build -f GenieACS.dockerfile . -t drumsergio/genieacs:1.2.0
 ```
 
+If you decide to build the dockerfile, do not change its name (tag). If you wish to modify it, change docker-compose.yml accordingly.
+
 ### Run Docker Compose
 
 ```bash
@@ -57,6 +59,8 @@ docker-compose up -d
 ```
 
 To log into the container, issue the command `docker exec -it genieacs /bin/bash`. If you happen to be managing this setting in your company, better to have some knowledge of Docker.
+
+The UI will be available at port `3000`. You will see a wizard where you can configure GenieACS according to your needs.
 
 ### Use of the Vagrantfile
 If you want to use GenieACS inside a VM you have a Vagrantfile ready to be deployed in VirtualBox. Although the use of Vagrant alongside VirtualBox is more development-oriented, it can be used along with your private Hyper-V or VMware cluster too, if you change the Vagranfile accordingly.
