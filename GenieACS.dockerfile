@@ -49,7 +49,7 @@ RUN grep -rl "ActiveRecord::Migration$" db | xargs sed -i 's/ActiveRecord::Migra
 RUN /root/.rbenv/shims/rails db:migrate RAILS_ENV=development
 
 WORKDIR /opt
-RUN git clone https://github.com/DrumSergio/genieacs-services
+RUN git clone https://github.com/DrumSergio/genieacs-services -b 1.1
 RUN cp genieacs-services/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 CMD ["/usr/bin/supervisord","-c","/etc/supervisor/conf.d/supervisord.conf"]
