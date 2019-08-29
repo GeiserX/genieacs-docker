@@ -1,7 +1,6 @@
 # GenieACS v1.2 Dockerfile #
 ##############################
 
-# Dockerfile of node:8-stretch here: https://github.com/nodejs/docker-node/blob/526c6e618300bdda0da4b3159df682cae83e14aa/8/stretch/Dockerfile
 FROM node:10-buster
 LABEL maintainer="acsdesk@protonmail.com"
 
