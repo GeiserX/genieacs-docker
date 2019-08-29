@@ -1,5 +1,5 @@
 # GenieACS v1.2 Dockerfile #
-##############################
+############################
 
 FROM node:10-buster
 LABEL maintainer="acsdesk@protonmail.com"
