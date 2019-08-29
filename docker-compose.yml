@@ -36,6 +36,8 @@ services:
 #            - ME_CONFIG_MONGODB_SERVER=mongo
 #            - ME_CONFIG_BASICAUTH_USERNAME=admin
 #            - ME_CONFIG_BASICAUTH_PASSWORD=mongo2018
+#        networks:
+#            - genieacs_network
 
 # Dockerfile here: https://hub.docker.com/r/drumsergio/genieacs/dockerfile
     genieacs:
@@ -59,7 +61,8 @@ services:
         depends_on:
             - 'genieacs'
         image: drumsergio/genieacs-sim
-
+        networks:
+            - genieacs_network
 
 volumes:
     data_db:
