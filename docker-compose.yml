@@ -47,6 +47,7 @@ services:
             - "3000:3000"
         volumes:
             - opt_volume:/opt
+            - usr_local_share_volume:/usr/local/share
         
 volumes:
     data_db:
