@@ -53,5 +53,5 @@ volumes:
     data_db:
     data_configdb:
     opt_volume:
-
+    usr_local_share_volume:
 
