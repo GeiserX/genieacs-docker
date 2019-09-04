@@ -17,6 +17,8 @@ services:
             - data_configdb:/data/configdb
         expose: 
             - 27017
+        networks:
+            - genieacs_network
 
 # Dockerfile here: https://github.com/mongo-express/mongo-express-docker/blob/b089fe7708d9dd619d648a6ec226fe0175b27740/Dockerfile
 ### WARNING: NOT RECOMMENDED TO RUN THIS SOFTWARE (mongo-express) IN PRODUCTION ENVIRONMENTS ###
@@ -34,6 +36,8 @@ services:
 #            - ME_CONFIG_MONGODB_SERVER=mongo
 #            - ME_CONFIG_BASICAUTH_USERNAME=admin
 #            - ME_CONFIG_BASICAUTH_PASSWORD=mongo2018
+#        networks:
+#            - genieacs_network
 
     genieacs:
         depends_on:
@@ -48,6 +52,18 @@ services:
         volumes:
             - opt_volume:/opt
             - usr_local_share_volume:/usr/local/share
+        networks:
+            - genieacs_network
+
+### THIS SERVICE IS NOT RECOMMENDED FOR PRODUCTION, JUST FOR TESTING PURPOSES ###
+# Dockerfile here: https://hub.docker.com/r/drumsergio/genieacs-sim/dockerfile
+    genieacs-sim:
+        depends_on:
+            - 'genieacs'
+        image: drumsergio/genieacs-sim
+        container_name: "genieacs-sim"
+        networks:
+            - genieacs_network
         
 volumes:
     data_db:
@@ -55,3 +71,5 @@ volumes:
     opt_volume:
     usr_local_share_volume:
 
+networks:
+    genieacs_network:
