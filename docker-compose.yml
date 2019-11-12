@@ -44,6 +44,7 @@ services:
         depends_on:
             - 'mongo'
         image: drumsergio/genieacs:1.2.0
+        restart: always
         container_name: "genieacs"
         ports:
             - "7547:7547"
