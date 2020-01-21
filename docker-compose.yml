@@ -46,6 +46,15 @@ services:
         image: drumsergio/genieacs:1.2.0
         restart: always
         container_name: "genieacs"
+        environment:
+            - GENIEACS_UI_JWT_SECRET=changeme
+            - GENIEACS_CWMP_ACCESS_LOG_FILE=/var/log/genieacs/genieacs-cwmp-access.log
+            - GENIEACS_NBI_ACCESS_LOG_FILE=/var/log/genieacs/genieacs-nbi-access.log
+            - GENIEACS_FS_ACCESS_LOG_FILE=/var/log/genieacs/genieacs-fs-access.log
+            - GENIEACS_UI_ACCESS_LOG_FILE=/var/log/genieacs/genieacs-ui-access.log
+            - GENIEACS_DEBUG_FILE=/var/log/genieacs/genieacs-debug.yaml
+            - GENIEACS_EXT_DIR=/opt/genieacs/ext
+            - GENIEACS_MONGODB_CONNECTION_URL=mongodb://mongo/genieacs
         ports:
             - "7547:7547"
             - "7557:7557"
