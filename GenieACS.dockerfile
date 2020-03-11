@@ -19,10 +19,6 @@ RUN useradd --system --no-create-home --user-group genieacs
 RUN mkdir /opt/genieacs/ext
 RUN chown genieacs:genieacs /opt/genieacs/ext
 
-ADD genieacs.env /opt/genieacs/genieacs.env
-RUN chown genieacs:genieacs /opt/genieacs/genieacs.env
-RUN chmod 600 /opt/genieacs/genieacs.env
-
 RUN mkdir /var/log/genieacs
 RUN chown genieacs:genieacs /var/log/genieacs
 
