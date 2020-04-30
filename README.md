@@ -8,6 +8,13 @@ GenieACS 1.2 tested against arm32-based K3s cluster, and with plain docker in De
 
 **Please**, modify `HelmChart/values.yaml` file accordingly to make it work inside your cluster. Tested in a K3s cluster with MetalLB Load Balancer.
 
+Installation process:
+
+```bash
+kubectl create namespace genieacs
+helm install genieacs . --values values.yaml --namespace genieacs
+```
+
 ### Install Docker-CE and Docker Compose (Only for Debian 10)
 
 **Please**, modify the `docker-compose.yml` file accordingly if you plan to deploy into production. Comment out the `volumes:` directive if you encounter problems in the installation.
