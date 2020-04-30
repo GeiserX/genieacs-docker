@@ -1,10 +1,16 @@
-# Docker Compose and Dockerfile files for GenieACS 1.2
+# Helm Chart, Docker Compose and Dockerfile files for GenieACS 1.2
 
-GenieACS 1.2 tested against Debian 10, CentOS 7 and QNAP QTS 4.3. Strongly recommended to install it in a machine with at least **4 GB of RAM** or more.
+GenieACS 1.2 tested against arm32-based K3s cluster, and with plain docker in Debian 10, CentOS 7 and QNAP QTS 4.3. Strongly recommended to install it in a machine with at least **4 GB of RAM** or more.
 
-**Please**, modify the `docker-compose.yml` file accordingly if you plan to deploy into production. Comment out the `volumes:` directive if you encounter problems in the installation.
+
+
+### Install in Kubernetes cluster
+
+**Please**, modify `HelmChart/values.yaml` file accordingly to make it work inside your cluster. Tested in a K3s cluster with MetalLB Load Balancer.
 
 ### Install Docker-CE and Docker Compose (Only for Debian 10)
+
+**Please**, modify the `docker-compose.yml` file accordingly if you plan to deploy into production. Comment out the `volumes:` directive if you encounter problems in the installation.
 
 ```bash
 apt update
