@@ -17,8 +17,6 @@ helm install genieacs . --values values.yaml --namespace genieacs
 
 ### Install Docker-CE and Docker Compose (Only for Debian 10)
 
-**Please**, modify the `docker-compose.yml` file accordingly if you plan to deploy into production. Comment out the `volumes:` directive if you encounter problems in the installation.
-
 ```bash
 apt update
 apt dist-upgrade -y
@@ -66,6 +64,8 @@ docker build -f GenieACS.dockerfile . -t drumsergio/genieacs:1.2.0
 If you decide to build the dockerfile, do not change its name (tag). If you wish to modify it, change docker-compose.yml accordingly.
 
 ### Run Docker Compose
+
+**Please**, modify the `docker-compose.yml` file accordingly if you plan to deploy into production. Comment out the `volumes:` directive if you encounter problems in the installation.
 
 If you deploy it in a QNAP's QTS then this is the only step needed after downloading `docker-compose.yml`:
 
