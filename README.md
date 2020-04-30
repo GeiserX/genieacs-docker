@@ -13,6 +13,7 @@ Installation process:
 ```bash
 kubectl create namespace genieacs
 helm install genieacs . --values values.yaml --namespace genieacs
+kubectl get all -n genieacs -o wide
 ```
 
 ### Install Docker-CE and Docker Compose (Only for Debian 10)
