@@ -1,7 +1,7 @@
 # GenieACS v1.2 Dockerfile #
 ############################
 
-FROM arm32v7/node
+FROM arm32v7/node:12-buster
 LABEL maintainer="acsdesk@protonmail.com"
 
 RUN apt-get update && apt-get install -y sudo supervisor git
