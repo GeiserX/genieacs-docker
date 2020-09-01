@@ -1,13 +1,13 @@
 # GenieACS v1.2 Dockerfile #
 ############################
 
-FROM node:10-buster
+FROM node:12-buster
 LABEL maintainer="acsdesk@protonmail.com"
 
 RUN apt-get update && apt-get install -y sudo supervisor git
 RUN mkdir -p /var/log/supervisor
 
-#sudo npm install -g --unsafe-perm genieacs@1.2.0
+#RUN npm install -g --unsafe-perm genieacs@1.2.0
 WORKDIR /opt
 RUN git clone https://github.com/genieacs/genieacs.git -b master
 WORKDIR /opt/genieacs
