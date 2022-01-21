@@ -1,7 +1,7 @@
 image:
   repository: drumsergio/genieacs
   pullPolicy: IfNotPresent
-  tag: "1.2"
+  tag: "latest"
 
 service_http:
   type: ClusterIP
@@ -33,9 +33,16 @@ ingress:
   #      - chart-example.local
 
 resources: # Modify according to your size
-  limits:
-    cpu: 2
-    memory: 4Gi
   requests:
     cpu: 500m
     memory: 2Gi
+
+env:
+  GENIEACS_UI_JWT_SECRET: changeme
+  GENIEACS_CWMP_ACCESS_LOG_FILE: /var/log/genieacs/genieacs-cwmp-access.log
+  GENIEACS_NBI_ACCESS_LOG_FILE: /var/log/genieacs/genieacs-nbi-access.log
+  GENIEACS_FS_ACCESS_LOG_FILE: /var/log/genieacs/genieacs-fs-access.log
+  GENIEACS_UI_ACCESS_LOG_FILE: /var/log/genieacs/genieacs-ui-access.log
+  GENIEACS_DEBUG_FILE: /var/log/genieacs/genieacs-debug.yaml
+  GENIEACS_EXT_DIR: /opt/genieacs/ext
+  GENIEACS_MONGODB_CONNECTION_URL: mongodb://mongo/genieacs
