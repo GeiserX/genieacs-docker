@@ -1,7 +1,7 @@
 image:
   repository: drumsergio/genieacs
   pullPolicy: IfNotPresent
-  tag: "1.2"
+  tag: "1.2.8"
 
 service_http:
   type: ClusterIP
@@ -33,9 +33,9 @@ ingress:
   #      - chart-example.local
 
 resources: # Modify according to your size
-  limits:
-    cpu: 2
-    memory: 4Gi
+  #limits:
+  #  cpu: 2
+  #  memory: 4Gi
   requests:
     cpu: 500m
     memory: 2Gi
