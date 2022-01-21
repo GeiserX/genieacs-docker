@@ -14,7 +14,7 @@ services:
         volumes:
             - data_db:/data/db
             - data_configdb:/data/configdb
-        expose: 
+        expose:
             - 27017
         networks:
             - genieacs_network
@@ -23,7 +23,7 @@ services:
     genieacs:
         depends_on:
             - 'mongo'
-        image: drumsergio/genieacs:1.2.0
+        image: drumsergio/genieacs:1.2.8
         restart: always
         container_name: "genieacs"
         environment:

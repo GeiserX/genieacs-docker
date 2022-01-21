@@ -1,23 +1,46 @@
-# Deployment files for GenieACS 1.2
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-GenieACS 1.2 can be installed ..
-tested against arm32-based K3s cluster, and with plain docker in Debian 10, CentOS 7 and QNAP QTS 4.3. Strongly recommended to install it in a machine with at least **4 GB of RAM** or more.
+- [GenieACS Deployment Tools](#genieacs-deployment-tools)
+    - [Install in Kubernetes cluster](#install-in-kubernetes-cluster)
+    - [Install Docker-CE and Docker Compose (Only for Debian 10)](#install-docker-ce-and-docker-compose-only-for-debian-10)
+    - [Install Docker-CE and Docker Compose (Only for CentOS 7)](#install-docker-ce-and-docker-compose-only-for-centos-7)
+    - [Pull/Build Dockerfile](#pullbuild-dockerfile)
+    - [Run Docker Compose](#run-docker-compose)
+    - [Use of the Vagrantfile](#use-of-the-vagrantfile)
+        - [This repo appears in the GenieACS Wiki: https://github.com/genieacs/genieacs/wiki/Docker-Installation-with-Docker-Compose](#this-repo-appears-in-the-genieacs-wiki-httpsgithubcomgenieacsgenieacswikidocker-installation-with-docker-compose)
 
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+# GenieACS Deployment Tools
 
-### Install in Kubernetes cluster
+GenieACS is a complex software stack that can be installed in many ways, and this repository contains the basic deployment tools to make your GenieACS installation a successful one.
 
-**Please**, modify `HelmChart/values.yaml` file accordingly to make it work inside your cluster. Tested in a K3s cluster with MetalLB Load Balancer.
+Please, I ask you to contribute to the repository through Pull Requests (PRs). Together we can improve any of the different deployment processes described here.
+
+## Instalation methods
+
+Using any of the installation methods, please bear in mind that I have always found that 4GB is the minimium amount of RAM that the software needs for its processesm, otherwise you may happen to fall into random errors..
+
+### Deployment on Kubernetes
+
+In the `genieacs-deploy-helmfile/` folder there is an example deployment leveraging [Helmfile](https://github.com/roboll/helmfile), but you will for sure need someone who is knowledgeable of Kubernetes. So skip this part if you don't.
+
+Modify the values files accordingly to make it work inside your cluster.
+Tested in a K3s cluster with MetalLB Load Balancer.
 
 Installation process:
 
 ```bash
-kubectl create namespace genieacs
-helm install genieacs . --values values.yaml --namespace genieacs
-kubectl get all -n genieacs -o wide
+helmfile -f `genieacs-deploy-helmfile/helmfile.yaml` apply
 ```
 
-### Install Docker-CE and Docker Compose (Only for Debian 10)
+### Deployment on Bare Metal using Docker-Compose
+
+The easier option is to install it using Docker Compose, as it needs less know-how. Here down you have two options: Instructions for Debian 10, and the instructions for CentOS 7.
+
+#### Preparation steps for Debian 10
 
 ```bash
 apt update
@@ -37,7 +60,7 @@ chmod +x /usr/local/bin/docker-compose
 cd /opt && git clone https://github.com/DrumSergio/GenieACS-Docker && cd GenieACS-Docker
 ```
 
-### Install Docker-CE and Docker Compose (Only for CentOS 7)
+#### Preparation steps for CentOS 7
 
 ```
 yum update -y
@@ -53,34 +76,32 @@ chmod +x /usr/bin/docker-compose
 cd /opt && git clone https://github.com/DrumSergio/GenieACS-Docker && cd GenieACS-Docker
 ```
 
-### Pull/Build Dockerfile
+#### Pull container or Build Dockerfile step (both for Debian 10 and CentOS 7)
 
 ```bash
-docker pull drumsergio/genieacs:1.2.0
+docker pull drumsergio/genieacs:1.2.8
 ```
 or:
 ```bash
-docker build -f GenieACS.dockerfile . -t drumsergio/genieacs:1.2.0
+docker build -f GenieACS.dockerfile . -t drumsergio/genieacs:1.2.8
 ```
 
-If you decide to build the dockerfile, do not change its name (tag). If you wish to modify it, change docker-compose.yml accordingly.
+If you decide to build the Dockerfile, do not change its name (tag). If you wish to modify it, change docker-compose.yml accordingly.
 
-### Run Docker Compose
+#### Run Docker Compose (both for Debian 10 and CentOS 7)
 
-**Please**, modify the `docker-compose.yml` file accordingly if you plan to deploy into production. Comment out the `volumes:` directive if you encounter problems in the installation.
-
-If you deploy it in a QNAP's QTS then this is the only step needed after downloading `docker-compose.yml`:
+Modify the `docker-compose.yml` file accordingly if you plan to deploy into production. Comment out the `volumes:` directive if you encounter problems in the installation.
 
 ```bash
 docker-compose up -d
 ```
 
-To log into the container, issue the command `docker exec -it genieacs /bin/bash`. If you happen to be managing this setting in your company, better to have some knowledge of Docker.
+To log into the container, issue the command `docker exec -it genieacs /bin/bash`. If you happen to be managing this setting in your company, it's better to have some knowledge of Docker.
 
 The UI will be available at port `3000`. You will see a wizard where you can configure GenieACS according to your needs.
 
-### Use of the Vagrantfile
-If you want to use GenieACS inside a VM you have a Vagrantfile ready to be deployed in VirtualBox. Although the use of Vagrant alongside VirtualBox is more development-oriented, it can be used along with your private Hyper-V or VMware cluster too, if you change the Vagranfile accordingly.
+### Deployment by means of a Vagrantfile
+There is a last method for bare-metal installations. If you want to use GenieACS inside a VM you have a Vagrantfile ready to be deployed in VirtualBox. Although the use of Vagrant alongside VirtualBox is more development-oriented, it can be used along with your private Hyper-V or VMware cluster too, if you change the Vagranfile accordingly.
 
 For this setting to work, you need Vagrant installed on your computer https://www.vagrantup.com/docs/installation/ and of course, VirtualBox if you decide to use this provider with the Vagrantfile I provided https://www.virtualbox.org/wiki/Downloads
 
