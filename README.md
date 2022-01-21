@@ -3,12 +3,14 @@
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [GenieACS Deployment Tools](#genieacs-deployment-tools)
-    - [Install in Kubernetes cluster](#install-in-kubernetes-cluster)
-    - [Install Docker-CE and Docker Compose (Only for Debian 10)](#install-docker-ce-and-docker-compose-only-for-debian-10)
-    - [Install Docker-CE and Docker Compose (Only for CentOS 7)](#install-docker-ce-and-docker-compose-only-for-centos-7)
-    - [Pull/Build Dockerfile](#pullbuild-dockerfile)
-    - [Run Docker Compose](#run-docker-compose)
-    - [Use of the Vagrantfile](#use-of-the-vagrantfile)
+  - [Instalation methods](#instalation-methods)
+    - [Deployment on Kubernetes](#deployment-on-kubernetes)
+    - [Deployment on Bare Metal using Docker-Compose](#deployment-on-bare-metal-using-docker-compose)
+      - [Preparation steps for Debian 10](#preparation-steps-for-debian-10)
+      - [Preparation steps for CentOS 7](#preparation-steps-for-centos-7)
+      - [Pull container or Build Dockerfile step (both for Debian 10 and CentOS 7)](#pull-container-or-build-dockerfile-step-both-for-debian-10-and-centos-7)
+      - [Run Docker Compose (both for Debian 10 and CentOS 7)](#run-docker-compose-both-for-debian-10-and-centos-7)
+    - [Deployment by means of a Vagrantfile](#deployment-by-means-of-a-vagrantfile)
         - [This repo appears in the GenieACS Wiki: https://github.com/genieacs/genieacs/wiki/Docker-Installation-with-Docker-Compose](#this-repo-appears-in-the-genieacs-wiki-httpsgithubcomgenieacsgenieacswikidocker-installation-with-docker-compose)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
