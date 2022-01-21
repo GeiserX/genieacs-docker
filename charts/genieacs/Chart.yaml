@@ -1,0 +1,9 @@
+apiVersion: v2
+name: genieacs
+description: A Helm chart for GenieACS app
+type: application
+version: 0.1.0
+appVersion: "1.2.8"
+maintainers:
+  - name: Sergio Fernandez
+    email: acsdesk@protonmai.com

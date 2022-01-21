@@ -1,6 +1,7 @@
-# Helm Chart, Docker Compose and Dockerfile files for GenieACS 1.2
+# Deployment files for GenieACS 1.2
 
-GenieACS 1.2 tested against arm32-based K3s cluster, and with plain docker in Debian 10, CentOS 7 and QNAP QTS 4.3. Strongly recommended to install it in a machine with at least **4 GB of RAM** or more.
+GenieACS 1.2 can be installed ..
+tested against arm32-based K3s cluster, and with plain docker in Debian 10, CentOS 7 and QNAP QTS 4.3. Strongly recommended to install it in a machine with at least **4 GB of RAM** or more.
 
 
 
