@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: genieacs_http
+  labels:
+    {{- include "genieacs.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service_http.type }}
+  ports:
+    - port: {{ .Values.service_http.port }}
+      targetPort: 3000
+      protocol: TCP
+      name: http    
+  selector:
+    {{- include "genieacs.selectorLabels" . | nindent 4 }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: genieacs_cwmp
+  labels:
+    {{- include "genieacs.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service_cwmp.type }}
+  ports:
+    - port: {{ .Values.service_cwmp.port }}
+      targetPort: 7547
+      protocol: TCP
+      name: cwmp
+  selector:
+    {{- include "genieacs.selectorLabels" . | nindent 4 }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: genieacs_nbi
+  labels:
+    {{- include "genieacs.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service_nbi.type }}
+  ports:
+    - port: {{ .Values.service_nbi.port }}
+      targetPort: 7557
+      protocol: TCP
+      name: nbi
+  selector:
+    {{- include "genieacs.selectorLabels" . | nindent 4 }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: genieacs_fs
+  labels:
+    {{- include "genieacs.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service_fs.type }}
+  ports:
+    - port: {{ .Values.service_fs.port }}
+      targetPort: 7567
+      protocol: TCP
+      name: fs
+  selector:
+    {{- include "genieacs.selectorLabels" . | nindent 4 }}

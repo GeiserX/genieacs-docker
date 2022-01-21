@@ -1,10 +1,9 @@
 # Use this file to pull GenieACS from DockerHub #
-
 version: "3"
 services:
 # Dockerfile here: https://github.com/docker-library/mongo/blob/6932ac255d29759af9a74c6931faeb02de0fe53e/4.0/Dockerfile
     mongo:
-        image: mongo:4.0 
+        image: mongo:4.4
         restart: always
         container_name: "mongo"
         environment:
@@ -20,30 +19,11 @@ services:
         networks:
             - genieacs_network
 
-### WARNING: NOT RECOMMENDED TO RUN THIS SERVICE (mongo-express) IN PRODUCTION ENVIRONMENTS ###
-# Dockerfile here: https://github.com/mongo-express/mongo-express-docker/blob/b089fe7708d9dd619d648a6ec226fe0175b27740/Dockerfile
-#    mongo-express: 
-#        image: mongo-express
-#        container_name: "mongo-express"
-#        restart: always
-#        depends_on:
-#            - 'mongo'
-#        ports:
-#            - 8081:8081
-#        environment:
-##            - ME_CONFIG_MONGODB_ADMINUSERNAME=user
-##            - ME_CONFIG_MONGODB_ADMINPASSWORD=password
-#            - ME_CONFIG_MONGODB_SERVER=mongo
-#            - ME_CONFIG_BASICAUTH_USERNAME=admin
-#            - ME_CONFIG_BASICAUTH_PASSWORD=mongo2018
-#        networks:
-#            - genieacs_network
-
-# Dockerfile here: https://hub.docker.com/r/drumsergio/genieacs/dockerfile
+# Dockerfile: https://hub.docker.com/r/drumsergio/genieacs/dockerfile
     genieacs:
         depends_on:
             - 'mongo'
-        image: drumsergio/genieacs:1.2.0
+        image: drumsergio/genieacs:1.2.8
         restart: always
         container_name: "genieacs"
         environment:
