@@ -12,6 +12,7 @@ WORKDIR /opt
 RUN git clone https://github.com/genieacs/genieacs.git -b master
 WORKDIR /opt/genieacs
 RUN npm install
+RUN npm i -D tslib
 RUN npm run build
 
 RUN useradd --system --no-create-home --user-group genieacs
