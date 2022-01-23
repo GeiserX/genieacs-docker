@@ -19,23 +19,23 @@
 
 GenieACS is a complex software stack that can be installed in many ways, and this repository contains the basic deployment tools to make your GenieACS installation a successful one.
 
-Please, I ask you to contribute to the repository through Pull Requests (PRs). Together we can improve any of the different deployment processes described here.
+Please, I ask you to contribute to the repository through Pull Requests (PRs). Together we can improve any of the different deployment processes described here - Or even add new deployment methods!
 
 ## Instalation methods
 
-Using any of the installation methods, please bear in mind that I have always found that 4GB is the minimium amount of RAM that the software needs for its processesm, otherwise you may happen to fall into random errors..
+Using any of the installation methods, please bear in mind that I have always found that 4GB is the minimium amount of RAM that the software needs for its processes, otherwise you may happen to fall into random errors.
 
 ### Deployment on Kubernetes
 
 In the `genieacs-deploy-helmfile/` folder there is an example deployment leveraging [Helmfile](https://github.com/roboll/helmfile), but you will for sure need someone who is knowledgeable of Kubernetes. So skip this part if you don't.
 
 Modify the values files accordingly to make it work inside your cluster.
-Tested in a K3s cluster with MetalLB Load Balancer.
+Tested independently (not reflecting current example values) in a K3s cluster with MetalLB Load Balancer.
 
 Installation process:
 
 ```bash
-helmfile -f `genieacs-deploy-helmfile/helmfile.yaml` apply
+helmfile -f genieacs-deploy-helmfile/helmfile.yaml apply
 ```
 
 ### Deployment on Bare Metal using Docker-Compose
