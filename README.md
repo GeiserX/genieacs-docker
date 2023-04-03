@@ -27,7 +27,8 @@ Using any of the installation methods, please bear in mind that I have always fo
 
 ### Deployment on Kubernetes
 
-In the `genieacs-deploy-helmfile/` folder there is an example deployment leveraging [Helmfile](https://github.com/roboll/helmfile), but you will for sure need someone who is knowledgeable of Kubernetes. So skip this part if you don't.
+
+In the `genieacs-deploy-helmfile/` folder there is an example deployment leveraging [Helmfile](https://github.com/roboll/helmfile).
 
 Modify the values files accordingly to make it work inside your cluster.
 Tested independently (not reflecting current example values) in a K3s cluster with MetalLB Load Balancer.

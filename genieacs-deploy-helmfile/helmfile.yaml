@@ -18,7 +18,7 @@ releases:
   - name: genieacs
     namespace: genieacs
     chart: ../charts/genieacs/
-    version: 0.1.0
+    version: 0.1.1
     labels:
       app: genieacs
       release: genieacs
