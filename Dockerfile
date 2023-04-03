@@ -1,17 +1,17 @@
 # GenieACS v1.2 Dockerfile #
 ############################
 
-FROM arm32v7/node:12-buster
+FROM node:18-buster
 LABEL maintainer="acsdesk@protonmail.com"
 
 RUN apt-get update && apt-get install -y sudo supervisor git
 RUN mkdir -p /var/log/supervisor
 
-#sudo npm install -g --unsafe-perm genieacs@1.2.0
+#RUN npm install -g --unsafe-perm genieacs@1.2.9
 WORKDIR /opt
-RUN git clone https://github.com/genieacs/genieacs.git -b master
+RUN git clone https://github.com/genieacs/genieacs.git -b v1.2.9 --depth 1
 WORKDIR /opt/genieacs
-RUN npm install
+RUN npm install 
 RUN npm i -D tslib
 RUN npm run build
 
@@ -26,7 +26,7 @@ RUN chown genieacs:genieacs /var/log/genieacs
 ADD genieacs.logrotate /etc/logrotate.d/genieacs
 
 WORKDIR /opt
-RUN git clone https://github.com/DrumSergio/genieacs-services -b 1.2
+RUN git clone https://github.com/DrumSergio/genieacs-services -b 1.2 --depth 1
 RUN cp genieacs-services/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN cp genieacs-services/run_with_env.sh /usr/bin/run_with_env.sh
 RUN chmod +x /usr/bin/run_with_env.sh
