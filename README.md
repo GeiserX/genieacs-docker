@@ -60,7 +60,7 @@ curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compo
 curl -L https://raw.githubusercontent.com/docker/compose/1.24.1/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose ## In order to enable command-line completion of Compose
 chmod +x /usr/local/bin/docker-compose
 
-cd /opt && git clone https://github.com/DrumSergio/GenieACS-Docker && cd GenieACS-Docker
+cd /opt && git clone https://github.com/GeiserX/GenieACS-Docker && cd GenieACS-Docker
 ```
 
 #### Preparation steps for CentOS 7
@@ -76,7 +76,7 @@ systemctl enable docker
 curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose
 chmod +x /usr/bin/docker-compose
 
-cd /opt && git clone https://github.com/DrumSergio/GenieACS-Docker && cd GenieACS-Docker
+cd /opt && git clone https://github.com/GeiserX/GenieACS-Docker && cd GenieACS-Docker
 ```
 
 #### Pull container or Build Dockerfile step (both for Debian 10 and CentOS 7)
