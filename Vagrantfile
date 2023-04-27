@@ -40,7 +40,7 @@ Vagrant.configure("2") do |config|
     curl -sL "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     curl -sL https://raw.githubusercontent.com/docker/compose/1.24.1/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
     chmod +x /usr/local/bin/docker-compose
-    cd /opt && git clone https://github.com/DrumSergio/GenieACS-Docker && cd GenieACS-Docker
+    cd /opt && git clone https://github.com/GeiserX/GenieACS-Docker && cd GenieACS-Docker
     docker-compose up -d
   SHELL
 end
