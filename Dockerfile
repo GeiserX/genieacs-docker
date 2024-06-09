@@ -9,7 +9,7 @@ RUN mkdir -p /var/log/supervisor
 
 #RUN npm install -g --unsafe-perm genieacs@1.2.11
 WORKDIR /opt
-RUN git clone https://github.com/genieacs/genieacs.git -b v1.2.11 --depth 1
+RUN git clone https://github.com/genieacs/genieacs.git -b v1.2.13 --depth 1
 WORKDIR /opt/genieacs
 RUN npm install 
 RUN npm i -D tslib
