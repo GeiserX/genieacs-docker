@@ -40,7 +40,7 @@ helmfile -f genieacs-deploy-helmfile/helmfile.yaml -i apply
 
 Feel free to dive in! [Open an issue](https://github.com/GeiserX/genieacs-docker/issues/new) or submit PRs.
 
-JW Library Plus follows the [Contributor Covenant](http://contributor-covenant.org/version/2/1/) Code of Conduct.
+GenieACS-Docker follows the [Contributor Covenant](http://contributor-covenant.org/version/2/1/) Code of Conduct.
 
 ### Contributors
 
