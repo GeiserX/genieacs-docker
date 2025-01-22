@@ -3,6 +3,8 @@ context: test-cluster
 repositories:
   - name: bitnami
     url: https://charts.bitnami.com/bitnami
+  - name: genieacs
+    url: https://geiserx.github.io/genieacs-docker
 
 releases:
   - name: mongodb-genieacs
@@ -17,7 +19,7 @@ releases:
     
   - name: genieacs
     namespace: genieacs
-    chart: ../charts/genieacs/
+    chart: genieacs/genieacs
     version: 0.1.1
     labels:
       app: genieacs
