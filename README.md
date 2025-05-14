@@ -1,4 +1,4 @@
-![img](https://github.com/GeiserX/genieacs-docker/blob/extra/logo.jpg?raw=true)
+![img](https://github.com/GeiserX/genieacs-docker/blob/extra/logo.png?raw=true)
 # Deployment tools for GenieACS
 
 [![genieacs compliant](https://img.shields.io/github/license/GeiserX/genieacs-docker)](https://github.com/GeiserX/genieacs-docker/blob/main/LICENSE)
@@ -41,8 +41,3 @@ helmfile -f genieacs-deploy-helmfile/helmfile.yaml -i apply
 Feel free to dive in! [Open an issue](https://github.com/GeiserX/genieacs-docker/issues/new) or submit PRs.
 
 GenieACS-Docker follows the [Contributor Covenant](http://contributor-covenant.org/version/2/1/) Code of Conduct.
-
-### Contributors
-
-This project exists thanks to all the people who contribute. 
-<a href="https://github.com/GeiserX/genieacs-docker/graphs/contributors"><img src="https://opencollective.com/genieacs-docker/contributors.svg?width=890&button=false" /></a>
