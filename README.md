@@ -1,4 +1,4 @@
-![img](https://github.com/GeiserX/genieacs-docker/blob/extra/logo.png?raw=true)
+![img](https://github.com/GeiserX/genieacs-docker/blob/master/extra/logo.png?raw=true)
 # Deployment tools for GenieACS
 
 [![genieacs compliant](https://img.shields.io/github/license/GeiserX/genieacs-docker)](https://github.com/GeiserX/genieacs-docker/blob/main/LICENSE)
