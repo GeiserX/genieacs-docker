@@ -1,6 +1,5 @@
 # Use this file to pull GenieACS from DockerHub #
 services:
-# Dockerfile here: https://github.com/docker-library/mongo/blob/6932ac255d29759af9a74c6931faeb02de0fe53e/4.0/Dockerfile
     mongo:
         image: mongo:8.0
         restart: always
@@ -33,7 +32,7 @@ services:
             - GENIEACS_UI_ACCESS_LOG_FILE=/var/log/genieacs/genieacs-ui-access.log
             - GENIEACS_DEBUG_FILE=/var/log/genieacs/genieacs-debug.yaml
             - GENIEACS_EXT_DIR=/opt/genieacs/ext
-            - GENIEACS_MONGODB_CONNECTION_URL=mongodb://mongo/genieacs
+            - GENIEACS_MONGODB_CONNECTION_URL=mongodb://mongo/genieacs?authSource=admin
         ports:
             - "7547:7547"
             - "7557:7557"

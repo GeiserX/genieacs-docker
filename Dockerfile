@@ -1,36 +1,69 @@
+############################
 # GenieACS v1.2 Dockerfile #
 ############################
+FROM node:24-bullseye AS build 
 
-FROM node:20-bullseye
-LABEL maintainer="acsdesk@protonmail.com"
+# packages needed only to build genieacs
+RUN apt-get update \
+ && apt-get install -y git python3 make g++ \
+ && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && apt-get install -y sudo supervisor git iputils-ping
-RUN mkdir -p /var/log/supervisor
-
-#RUN npm install -g --unsafe-perm genieacs@1.2.11
+# Install GenieACS
 WORKDIR /opt
-RUN git clone https://github.com/genieacs/genieacs.git -b v1.2.13 --depth 1
+ARG GENIEACS_VERSION=v1.2.13
+RUN git clone --depth 1 --single-branch \
+      --branch "${GENIEACS_VERSION}" \
+      https://github.com/genieacs/genieacs.git
+#RUN npm install -g --unsafe-perm genieacs@1.2.13
+
 WORKDIR /opt/genieacs
-RUN npm install 
-RUN npm i -D tslib
+RUN npm ci --unsafe-perm 
+#RUN npm i -D tslib
 RUN npm run build
 
-RUN useradd --system --no-create-home --user-group genieacs
-#RUN mkdir /opt/genieacs
-RUN mkdir /opt/genieacs/ext
-RUN chown genieacs:genieacs /opt/genieacs/ext
+###########################################
+# ----- helper stage: service files ------#
+###########################################
 
-RUN mkdir /var/log/genieacs
-RUN chown genieacs:genieacs /var/log/genieacs
+FROM debian:bullseye-slim AS services
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends git ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
+WORKDIR /tmp
+RUN git clone --depth 1 --single-branch --branch 1.2.13 \
+      https://github.com/GeiserX/genieacs-services.git
 
-ADD genieacs.logrotate /etc/logrotate.d/genieacs
+##################################
+# -------- Final image ----------#
+##################################
+FROM debian:bullseye-slim
 
-WORKDIR /opt
-RUN git clone https://github.com/GeiserX/genieacs-services -b 1.2 --depth 1
-RUN cp genieacs-services/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-RUN cp genieacs-services/run_with_env.sh /usr/bin/run_with_env.sh
-RUN chmod +x /usr/bin/run_with_env.sh
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+      supervisor ca-certificates iputils-ping logrotate \
+ && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /var/log/genieacs
+# Copy Node runtime and GenieACS artefacts from the build stage
+COPY --from=build /usr/local /usr/local
+COPY --from=build /opt/genieacs /opt/genieacs
 
-CMD ["/usr/bin/supervisord","-c","/etc/supervisor/conf.d/supervisord.conf"]
+# supervisor + helper scripts from the services repo
+COPY --from=services /tmp/genieacs-services/supervisord.conf \
+     /etc/supervisor/conf.d/genieacs.conf
+COPY --from=services /tmp/genieacs-services/run_with_env.sh \
+     /usr/local/bin/run_with_env.sh
+RUN chmod +x /usr/local/bin/run_with_env.sh
+
+# logrotate rule
+COPY genieacs.logrotate /etc/logrotate.d/genieacs
+
+# create runtime user
+RUN useradd --system --no-create-home --home /opt/genieacs genieacs \
+ && mkdir -p /opt/genieacs/ext /var/log/genieacs \
+ && chown -R genieacs:genieacs /opt/genieacs /var/log/genieacs
+
+USER genieacs
+WORKDIR /opt/genieacs
+
+EXPOSE 7547 7557 7567 3000
+CMD ["/usr/bin/supervisord","-c","/etc/supervisor/conf.d/genieacs.conf"]
