@@ -1,38 +1,21 @@
-# Use this file to pull GenieACS from DockerHub #
 services:
-    mongo:
-        image: mongo:8.0
-        restart: always
-        container_name: "mongo-genieacs"
-        environment:
-#            - MONGO_INITDB_ROOT_USERNAME=userchange
-#            - MONGO_INITDB_ROOT_PASSWORD=passwordchange
-            - MONGO_DATA_DIR=/data/db
-            - MONGO_LOG_DIR=/var/log/mongodb
-        volumes:
-            - data_db:/data/db
-            - data_configdb:/data/configdb
-        expose:
-            - 27017
-        networks:
-            - genieacs_network
-
-# Dockerfile: https://hub.docker.com/r/drumsergio/genieacs/dockerfile
+### GenieACS Docker ###
+# Dockerfile: https://hub.docker.com/r/drumsergio/genieacs/Dockerfile
     genieacs:
         depends_on:
             - 'mongo'
-        image: drumsergio/genieacs:1.2.13
+        image: drumsergio/genieacs:latest
         restart: always
         container_name: "genieacs"
         environment:
-            - GENIEACS_UI_JWT_SECRET=changeme
-            - GENIEACS_CWMP_ACCESS_LOG_FILE=/var/log/genieacs/genieacs-cwmp-access.log
-            - GENIEACS_NBI_ACCESS_LOG_FILE=/var/log/genieacs/genieacs-nbi-access.log
-            - GENIEACS_FS_ACCESS_LOG_FILE=/var/log/genieacs/genieacs-fs-access.log
-            - GENIEACS_UI_ACCESS_LOG_FILE=/var/log/genieacs/genieacs-ui-access.log
-            - GENIEACS_DEBUG_FILE=/var/log/genieacs/genieacs-debug.yaml
-            - GENIEACS_EXT_DIR=/opt/genieacs/ext
-            - GENIEACS_MONGODB_CONNECTION_URL=mongodb://mongo/genieacs?authSource=admin
+            GENIEACS_UI_JWT_SECRET: changeme
+            GENIEACS_CWMP_ACCESS_LOG_FILE: /var/log/genieacs/genieacs-cwmp-access.log
+            GENIEACS_NBI_ACCESS_LOG_FILE: /var/log/genieacs/genieacs-nbi-access.log
+            GENIEACS_FS_ACCESS_LOG_FILE: /var/log/genieacs/genieacs-fs-access.log
+            GENIEACS_UI_ACCESS_LOG_FILE: /var/log/genieacs/genieacs-ui-access.log
+            GENIEACS_DEBUG_FILE: /var/log/genieacs/genieacs-debug.yaml
+            GENIEACS_EXT_DIR: /opt/genieacs/ext
+            GENIEACS_MONGODB_CONNECTION_URL: mongodb://mongo/genieacs?authSource=admin
         ports:
             - "7547:7547"
             - "7557:7557"
@@ -43,15 +26,49 @@ services:
         networks:
             - genieacs_network
 
-### THIS SERVICE IS JUST FOR TESTING PURPOSES ###
-# Dockerfile here: https://hub.docker.com/r/drumsergio/genieacs-sim/dockerfile
+### Main GenieACS DB: MongoDB ###
+# Dockerfile: https://github.com/dockerfile/mongodb/blob/master/Dockerfile
+    mongo:
+        image: mongo:8.0
+        restart: always
+        container_name: "mongo-genieacs"
+        environment:
+#            MONGO_INITDB_ROOT_USERNAME: userchange
+#            MONGO_INITDB_ROOT_PASSWORD: passwordchange
+            MONGO_DATA_DIR: /data/db
+            MONGO_LOG_DIR: /var/log/mongodb
+        volumes:
+            - data_db:/data/db
+            - data_configdb:/data/configdb
+        expose:
+            - 27017
+        networks:
+            - genieacs_network
+
+### THIS SERVICE IS JUST FOR TESTING ###
+# Dockerfile here: https://hub.docker.com/r/drumsergio/genieacs-sim/Dockerfile
     genieacs-sim:
         depends_on:
             - 'genieacs'
-        image: drumsergio/genieacs-sim
+        image: drumsergio/genieacs-sim:latest
         container_name: "genieacs-sim"
         networks:
             - genieacs_network
+
+### THIS SERVICE IS JUST FOR MCP (AI) ###
+# Dockerfile here: https://hub.docker.com/r/drumsergio/genieacs-mcp/Dockerfile
+    mcp:
+        depends_on:
+        - 'genieacs'
+        image: drumsergio/genieacs-mcp:latest
+        environment:
+            ACS_URL: http://genieacs:7557
+            ACS_USER: admin
+            ACS_PASS: admin # Set by default after the wizard, please change
+        ports:
+        - "8080:8080"
+        networks:
+        - genieacs_network
 
 volumes:
     data_db:
@@ -60,3 +77,4 @@ volumes:
 
 networks:
     genieacs_network:
+ 
