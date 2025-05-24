@@ -1,7 +1,13 @@
+# syntax=docker/dockerfile:1
 ############################
 # GenieACS v1.2 Dockerfile #
-############################
-FROM node:24-bullseye AS build 
+####################################################################
+# docker buildx build --platform linux/amd64,linux/arm64 \         #
+#   -t drumsergio/genieacs:version -t drumsergio/genieacs:latest \ #
+#   --push .                                                       #
+####################################################################
+FROM node:24-bookworm AS build 
+LABEL maintainer="acsdesk@protonmail.com"
 
 # packages needed only to build genieacs
 RUN apt-get update \
@@ -25,7 +31,7 @@ RUN npm run build
 # ----- helper stage: service files ------#
 ###########################################
 
-FROM debian:bullseye-slim AS services
+FROM debian:bookworm-slim AS services
 RUN apt-get update && \
     apt-get install -y --no-install-recommends git ca-certificates && \
     rm -rf /var/lib/apt/lists/*
@@ -36,7 +42,7 @@ RUN git clone --depth 1 --single-branch --branch 1.2.13 \
 ##################################
 # -------- Final image ----------#
 ##################################
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \

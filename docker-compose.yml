@@ -55,9 +55,9 @@ services:
         networks:
             - genieacs_network
 
-### THIS SERVICE IS JUST FOR MCP (AI) ###
+### GenieACS MCP Server (AI) ###
 # Dockerfile here: https://hub.docker.com/r/drumsergio/genieacs-mcp/Dockerfile
-    mcp:
+    genieacs-mcp:
         depends_on:
         - 'genieacs'
         image: drumsergio/genieacs-mcp:latest
