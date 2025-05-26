@@ -1,5 +1,8 @@
 <img src="https://github.com/GeiserX/genieacs-docker/blob/master/extra/logo.png" width="100"/>
 
+![Docker Image](https://img.shields.io/docker/pulls/drumsergio/genieacs-docker)  
+![GitHub license](https://img.shields.io/github/license/GeiserX/genieacs-docker)
+
 # Deployment tools for GenieACS
 
 [![genieacs compliant](https://img.shields.io/github/license/GeiserX/genieacs-docker)](https://github.com/GeiserX/genieacs-docker/blob/main/LICENSE)
@@ -7,6 +10,7 @@
 This project contains two methods to deploy GenieACS in your environment: 
 1. Docker compose method
 2. Helm chart (Helmfile) method
+
 
 ## Table of Contents
 
