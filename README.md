@@ -1,10 +1,8 @@
 <img src="https://github.com/GeiserX/genieacs-docker/blob/master/extra/logo.png" width="100"/>
 
-![Docker Image](https://img.shields.io/docker/pulls/drumsergio/genieacs-docker)  
-![GitHub license](https://img.shields.io/github/license/GeiserX/genieacs-docker)
-
 # Deployment tools for GenieACS
 
+![Docker Image](https://img.shields.io/docker/pulls/drumsergio/genieacs)  
 [![genieacs compliant](https://img.shields.io/github/license/GeiserX/genieacs-docker)](https://github.com/GeiserX/genieacs-docker/blob/main/LICENSE)
 
 This project contains two methods to deploy GenieACS in your environment: 
