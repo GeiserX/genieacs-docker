@@ -61,6 +61,7 @@ services:
         depends_on:
         - 'genieacs'
         image: drumsergio/genieacs-mcp:latest
+        container_name: "genieacs-mcp"
         environment:
             ACS_URL: http://genieacs:7557
             ACS_USER: admin
