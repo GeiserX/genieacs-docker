@@ -6,10 +6,12 @@ metadata:
     {{- include "genieacs.labels" . | nindent 4 }}
   annotations:
     "helm.sh/hook": test
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded
 spec:
   containers:
     - name: wget
-      image: busybox
+      image: busybox:latest
       command: ['wget']
-      args: ['{{ include "genieacs.fullname" . }}:{{ .Values.service.port }}']
+      args: ['--spider', '--quiet', 'http://{{ include "genieacs.fullname" . }}-http:{{ .Values.service_http.port_http }}']
   restartPolicy: Never
