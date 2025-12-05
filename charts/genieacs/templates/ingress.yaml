@@ -26,7 +26,7 @@ spec:
             pathType: {{ .pathType }}
             backend:
               service:
-                name: {{ include "genieacs.fullname" $. }}
+                name: {{ include "genieacs.fullname" $ }}
                 port:
                   number: {{ $.Values.service_http.port_http }}
           {{- end }}

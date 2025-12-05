@@ -1,0 +1,8 @@
+# Chart Releaser configuration
+owner: GeiserX
+git-repo-url: https://github.com/GeiserX/genieacs-docker
+charts-repo-url: https://geiserx.github.io/genieacs-docker
+packages-with-index: true
+index-path: index.yaml
+release-name-template: "{{ .Name }}-{{ .Version }}"
+

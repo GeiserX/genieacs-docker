@@ -1,9 +1,9 @@
 # syntax=docker/dockerfile:1
 ############################
-# GenieACS v1.2 Dockerfile #
+# GenieACS v1.2.13.2 Dockerfile #
 ####################################################################
 # docker buildx build --platform linux/amd64,linux/arm64 \         #
-#   -t drumsergio/genieacs:version -t drumsergio/genieacs:latest \ #
+#   -t drumsergio/genieacs:1.2.13.2 -t drumsergio/genieacs:latest \ #
 #   --push .                                                       #
 ####################################################################
 FROM node:24-bookworm AS build 
@@ -46,7 +46,7 @@ FROM debian:bookworm-slim
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
-      supervisor ca-certificates iputils-ping logrotate \
+      supervisor ca-certificates iputils-ping logrotate git \
  && rm -rf /var/lib/apt/lists/*
 
 # Copy Node runtime and GenieACS artefacts from the build stage
@@ -61,7 +61,7 @@ COPY --from=services /tmp/genieacs-services/run_with_env.sh \
 RUN chmod +x /usr/local/bin/run_with_env.sh
 
 # logrotate rule
-COPY genieacs.logrotate /etc/logrotate.d/genieacs
+COPY config/genieacs.logrotate /etc/logrotate.d/genieacs
 
 # create runtime user
 RUN useradd --system --no-create-home --home /opt/genieacs genieacs \
