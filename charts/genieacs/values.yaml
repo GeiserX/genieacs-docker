@@ -69,8 +69,10 @@ serviceAccount:
 
 podSecurityContext:
   fsGroup: 1000
-  runAsNonRoot: true
-  runAsUser: 1000
+  # Note: Container runs as genieacs user (UID 999) by default
+  # Set runAsNonRoot: false if you need to run as root for supervisord
+  runAsNonRoot: false
+  runAsUser: 0
 
 securityContext:
   allowPrivilegeEscalation: false
@@ -78,8 +80,10 @@ securityContext:
     drop:
     - ALL
   readOnlyRootFilesystem: false
-  runAsNonRoot: true
-  runAsUser: 1000
+  # Note: Container runs as genieacs user (UID 999) by default
+  # Set runAsNonRoot: false if you need to run as root for supervisord
+  runAsNonRoot: false
+  runAsUser: 0
 
 livenessProbe:
   enabled: true
