@@ -14,10 +14,19 @@ spec:
       labels:
         {{- include "genieacs.selectorLabels" . | nindent 8 }}
     spec:
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "genieacs.serviceAccountName" . }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           env:
             {{- range $key, $value := .Values.env }}
             - name: {{ $key }}
@@ -28,22 +37,55 @@ spec:
           ports:
             - name: http
               containerPort: {{ .Values.service_http.port_http }}
+              protocol: TCP
             - name: cwmp
               containerPort: {{ .Values.service_cwmp.port_cwmp }}
+              protocol: TCP
             - name: nbi
               containerPort: {{ .Values.service_nbi.port_nbi }}
+              protocol: TCP
             - name: fs
               containerPort: {{ .Values.service_fs.port_fs }}
+              protocol: TCP
+          {{- if .Values.livenessProbe.enabled }}
+          livenessProbe:
+            {{- toYaml .Values.livenessProbe.httpGet | nindent 12 }}
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.readinessProbe.enabled }}
+          readinessProbe:
+            {{- toYaml .Values.readinessProbe.httpGet | nindent 12 }}
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.persistence.enabled }}
           volumeMounts:
             - name: opt-volume
               mountPath: /opt
+          {{- end }}
           resources:
-            limits:
-              {{- toYaml .Values.resources.limits | nindent 12 }}
-            requests:
-              {{- toYaml .Values.resources.requests | nindent 12 }}
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- if .Values.persistence.enabled }}
       volumes:
         - name: opt-volume
           persistentVolumeClaim:
             claimName: {{ include "genieacs.fullname" . }}-pvc
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       restartPolicy: Always

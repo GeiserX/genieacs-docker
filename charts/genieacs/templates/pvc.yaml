@@ -6,7 +6,8 @@ metadata:
   labels:
     {{- include "genieacs.labels" . | nindent 4 }}
 spec:
-  accessModes: {{- toJson .Values.persistence.accessModes }}
+  accessModes:
+    {{- toYaml .Values.persistence.accessModes | nindent 4 }}
   resources:
     requests:
       storage: {{ .Values.persistence.size }}

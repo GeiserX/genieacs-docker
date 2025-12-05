@@ -1,75 +1,96 @@
 services:
-### GenieACS Docker ###
-# Dockerfile: https://hub.docker.com/r/drumsergio/genieacs/Dockerfile
-    genieacs:
-        depends_on:
-            - 'mongo'
-        image: drumsergio/genieacs:latest
-        restart: always
-        container_name: "genieacs"
-        environment:
-            GENIEACS_UI_JWT_SECRET: changeme
-            GENIEACS_CWMP_ACCESS_LOG_FILE: /var/log/genieacs/genieacs-cwmp-access.log
-            GENIEACS_NBI_ACCESS_LOG_FILE: /var/log/genieacs/genieacs-nbi-access.log
-            GENIEACS_FS_ACCESS_LOG_FILE: /var/log/genieacs/genieacs-fs-access.log
-            GENIEACS_UI_ACCESS_LOG_FILE: /var/log/genieacs/genieacs-ui-access.log
-            GENIEACS_DEBUG_FILE: /var/log/genieacs/genieacs-debug.yaml
-            GENIEACS_EXT_DIR: /opt/genieacs/ext
-            GENIEACS_MONGODB_CONNECTION_URL: mongodb://mongo/genieacs?authSource=admin
-        ports:
-            - "7547:7547"
-            - "7557:7557"
-            - "7567:7567"
-            - "3000:3000"
-        volumes:
-            - opt_volume:/opt
-        networks:
-            - genieacs_network
+  ### GenieACS Docker ###
+  # Dockerfile: https://hub.docker.com/r/drumsergio/genieacs/Dockerfile
+  genieacs:
+    depends_on:
+      mongo:
+        condition: service_healthy
+    image: drumsergio/genieacs:1.2.13.2
+    restart: unless-stopped
+    container_name: genieacs
+    environment:
+      GENIEACS_UI_JWT_SECRET: changeme
+      GENIEACS_CWMP_ACCESS_LOG_FILE: /var/log/genieacs/genieacs-cwmp-access.log
+      GENIEACS_NBI_ACCESS_LOG_FILE: /var/log/genieacs/genieacs-nbi-access.log
+      GENIEACS_FS_ACCESS_LOG_FILE: /var/log/genieacs/genieacs-fs-access.log
+      GENIEACS_UI_ACCESS_LOG_FILE: /var/log/genieacs/genieacs-ui-access.log
+      GENIEACS_DEBUG_FILE: /var/log/genieacs/genieacs-debug.yaml
+      GENIEACS_EXT_DIR: /opt/genieacs/ext
+      GENIEACS_MONGODB_CONNECTION_URL: mongodb://mongo/genieacs?authSource=admin
+    ports:
+      - "7547:7547"
+      - "7557:7557"
+      - "7567:7567"
+      - "3000:3000"
+    volumes:
+      - opt_volume:/opt
+    networks:
+      - genieacs_network
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
 
-### Main GenieACS DB: MongoDB ###
-# Dockerfile: https://github.com/dockerfile/mongodb/blob/master/Dockerfile
-    mongo:
-        image: mongo:8.0
-        restart: always
-        container_name: "mongo-genieacs"
-        environment:
-#            MONGO_INITDB_ROOT_USERNAME: userchange
-#            MONGO_INITDB_ROOT_PASSWORD: passwordchange
-            MONGO_DATA_DIR: /data/db
-            MONGO_LOG_DIR: /var/log/mongodb
-        volumes:
-            - data_db:/data/db
-            - data_configdb:/data/configdb
-        expose:
-            - 27017
-        networks:
-            - genieacs_network
+  ### Main GenieACS DB: MongoDB ###
+  mongo:
+    image: mongo:8.0
+    restart: unless-stopped
+    container_name: mongo-genieacs
+    environment:
+      # Uncomment and set these for production use
+      # MONGO_INITDB_ROOT_USERNAME: userchange
+      # MONGO_INITDB_ROOT_PASSWORD: passwordchange
+      MONGO_DATA_DIR: /data/db
+      MONGO_LOG_DIR: /var/log/mongodb
+    volumes:
+      - data_db:/data/db
+      - data_configdb:/data/configdb
+    expose:
+      - "27017"
+    networks:
+      - genieacs_network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
 
-### THIS SERVICE IS JUST FOR TESTING ###
-# Dockerfile here: https://hub.docker.com/r/drumsergio/genieacs-sim/Dockerfile
-    genieacs-sim:
-        depends_on:
-            - 'genieacs'
-        image: drumsergio/genieacs-sim:latest
-        container_name: "genieacs-sim"
-        networks:
-            - genieacs_network
+  ### THIS SERVICE IS JUST FOR TESTING ###
+  # Dockerfile here: https://hub.docker.com/r/drumsergio/genieacs-sim/Dockerfile
+  genieacs-sim:
+    depends_on:
+      genieacs:
+        condition: service_healthy
+    image: drumsergio/genieacs-sim:latest
+    container_name: genieacs-sim
+    restart: unless-stopped
+    networks:
+      - genieacs_network
+    profiles:
+      - testing
 
-### GenieACS MCP Server (AI) ###
-# Dockerfile here: https://hub.docker.com/r/drumsergio/genieacs-mcp/Dockerfile
-    genieacs-mcp:
-        depends_on:
-        - 'genieacs'
-        image: drumsergio/genieacs-mcp:latest
-        container_name: "genieacs-mcp"
-        environment:
-            ACS_URL: http://genieacs:7557
-            ACS_USER: admin
-            ACS_PASS: admin # Set by default after the wizard, please change
-        ports:
-        - "8080:8080"
-        networks:
-        - genieacs_network
+  ### GenieACS MCP Server (AI) ###
+  # Dockerfile here: https://hub.docker.com/r/drumsergio/genieacs-mcp/Dockerfile
+  genieacs-mcp:
+    depends_on:
+      genieacs:
+        condition: service_healthy
+    image: drumsergio/genieacs-mcp:latest
+    container_name: genieacs-mcp
+    restart: unless-stopped
+    environment:
+      ACS_URL: http://genieacs:7557
+      ACS_USER: admin
+      ACS_PASS: admin # Set by default after the wizard, please change
+    ports:
+      - "8080:8080"
+    networks:
+      - genieacs_network
+    profiles:
+      - mcp
 
 volumes:
     data_db:
