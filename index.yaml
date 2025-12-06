@@ -5,6 +5,31 @@ entries:
       category: Infrastructure
     apiVersion: v2
     appVersion: 1.2.13.2
+    created: "2025-12-06T23:31:18.907488041Z"
+    description: A Helm chart for GenieACS - an open-source implementation of TR-069
+      ACS
+    digest: c9dc0545b59265e96113aa89a440cef64341cadd83aaf4653ddc10f755c2c449
+    home: https://genieacs.com
+    keywords:
+    - genieacs
+    - tr-069
+    - acs
+    - cpe
+    - device-management
+    maintainers:
+    - email: acsdesk@protonmail.com
+      name: Sergio Fernandez
+    name: genieacs
+    sources:
+    - https://github.com/genieacs/genieacs
+    type: application
+    urls:
+    - https://github.com/GeiserX/genieacs-docker/releases/download/genieacs-0.1.3/genieacs-0.1.3.tgz
+    version: 0.1.3
+  - annotations:
+      category: Infrastructure
+    apiVersion: v2
+    appVersion: 1.2.13.2
     created: "2025-12-06T22:34:42.513737424Z"
     description: A Helm chart for GenieACS - an open-source implementation of TR-069
       ACS
@@ -51,4 +76,4 @@ entries:
     urls:
     - genieacs-0.1.1.tgz
     version: 0.1.1
-generated: "2025-12-06T22:34:42.513745289Z"
+generated: "2025-12-06T23:31:18.907500153Z"
