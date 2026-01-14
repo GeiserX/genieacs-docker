@@ -68,6 +68,7 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Update Docker Hub description
+        continue-on-error: true
         uses: peter-evans/dockerhub-description@v4
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
