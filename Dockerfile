@@ -1,9 +1,9 @@
 # syntax=docker/dockerfile:1
 ############################
-# GenieACS v1.2.13.2 Dockerfile #
+# GenieACS v1.2.13.3 Dockerfile #
 ####################################################################
 # docker buildx build --platform linux/amd64,linux/arm64 \         #
-#   -t drumsergio/genieacs:1.2.13.2 -t drumsergio/genieacs:latest \ #
+#   -t drumsergio/genieacs:1.2.13.3 -t drumsergio/genieacs:latest \ #
 #   --push .                                                       #
 ####################################################################
 FROM node:24-bookworm AS build 

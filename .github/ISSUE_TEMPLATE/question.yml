@@ -1,0 +1,65 @@
+name: ❓ Question / Support
+description: Ask a question or get help with setup
+title: "[Question]: "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have a question? We're here to help! Please check the [README](https://github.com/GeiserX/genieacs-docker#readme) and [GenieACS Wiki](https://github.com/genieacs/genieacs/wiki) first.
+
+  - type: dropdown
+    id: topic
+    attributes:
+      label: Topic
+      description: What is your question about?
+      options:
+        - Installation / Setup
+        - Docker Compose Configuration
+        - Helm / Kubernetes Deployment
+        - Environment Variables
+        - MongoDB Connection
+        - GenieACS Configuration
+        - Performance / Scaling
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+      description: What would you like to know?
+      placeholder: "How do I..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: tried
+    attributes:
+      label: What have you tried?
+      description: Describe what you've already attempted
+      placeholder: "I've tried..."
+
+  - type: textarea
+    id: config
+    attributes:
+      label: Current Configuration
+      description: Share relevant parts of your docker-compose.yml or environment (remove sensitive data!)
+      render: yaml
+      placeholder: |
+        services:
+          genieacs:
+            image: drumsergio/genieacs:latest
+            environment:
+              - GENIEACS_CWMP_ACCESS_LOG_FILE=/var/log/genieacs/...
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I have read the [README](https://github.com/GeiserX/genieacs-docker#readme)
+          required: true
+        - label: I have searched existing issues for similar questions
+          required: true
