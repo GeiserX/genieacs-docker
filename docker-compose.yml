@@ -23,7 +23,7 @@ services:
       - "7567:7567"
       - "3000:3000"
     volumes:
-      - opt_volume:/opt
+      - ext_volume:/opt/genieacs/ext
     networks:
       - genieacs_network
     healthcheck:
@@ -95,7 +95,7 @@ services:
 volumes:
     data_db:
     data_configdb:
-    opt_volume:
+    ext_volume:
 
 networks:
     genieacs_network:
