@@ -1,4 +1,5 @@
-/var/log/genieacs/*.{log,yaml} {
+"/var/log/genieacs/*.log"
+"/var/log/genieacs/*.yaml" {
     daily
     rotate 30
     compress
