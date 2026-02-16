@@ -46,7 +46,7 @@ FROM debian:bookworm-slim
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
-      supervisor ca-certificates iputils-ping logrotate git wget \
+      supervisor ca-certificates iputils-ping logrotate git wget cron gosu \
  && rm -rf /var/lib/apt/lists/*
 
 # Copy Node runtime and GenieACS artefacts from the build stage
@@ -60,6 +60,9 @@ COPY --from=services /tmp/genieacs-services/run_with_env.sh \
      /usr/local/bin/run_with_env.sh
 RUN chmod +x /usr/local/bin/run_with_env.sh
 
+# remove unnecessary dpkg and apt-compat scripts from cron.daily
+RUN rm -rf /etc/cron.daily/dpkg && rm -rf /etc/cron.daily/apt-compat
+
 # logrotate rule
 COPY config/genieacs.logrotate /etc/logrotate.d/genieacs
 
@@ -68,7 +71,11 @@ RUN useradd --system --no-create-home --home /opt/genieacs genieacs \
  && mkdir -p /opt/genieacs/ext /var/log/genieacs \
  && chown -R genieacs:genieacs /opt/genieacs /var/log/genieacs
 
-USER genieacs
+COPY entrypoint.sh /opt/entrypoint.sh
+RUN chmod +x /opt/entrypoint.sh
+
+ENTRYPOINT ["/opt/entrypoint.sh"]
+
 WORKDIR /opt/genieacs
 
 EXPOSE 7547 7557 7567 3000
