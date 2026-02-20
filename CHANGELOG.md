@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.13.4] - 2026-02-20
+
+### Added
+- **Working logrotate** with cron daemon for automatic log rotation
+- **gosu** for proper privilege dropping after starting cron
+- **entrypoint.sh** to manage cron startup before supervisord
+
+### Changed
+- Container now starts as root to run cron, then drops to genieacs via gosu
+- Logrotate config updated with `missingok` and `su genieacs genieacs` directives
+- Removed unnecessary cron.daily scripts (dpkg, apt-compat) that blocked processing
+
+### Fixed
+- Fixed logrotate syntax error with brace expansion (#31)
+- Fixed logrotate not running due to missing cron daemon
+
+### Contributors
+- Thanks to [@Rocket78](https://github.com/Rocket78) for implementing the working logrotate solution (#32)
+
 ## [1.2.13.2] - 2025-12-05
 
 ### Added
