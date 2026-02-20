@@ -5,4 +5,6 @@
     compress
     delaycompress
     dateext
+    missingok
+    su genieacs genieacs
 }
