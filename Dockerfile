@@ -53,6 +53,10 @@ RUN apt-get update \
 COPY --from=build /usr/local /usr/local
 COPY --from=build /opt/genieacs /opt/genieacs
 
+# Keep a pristine copy of the application outside /opt so that the
+# entrypoint can populate a persistent volume mounted at /opt.
+COPY --from=build /opt/genieacs /usr/share/genieacs
+
 # supervisor + helper scripts from the services repo
 COPY --from=services /tmp/genieacs-services/supervisord.conf \
      /etc/supervisor/conf.d/genieacs.conf
