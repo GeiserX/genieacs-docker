@@ -71,10 +71,10 @@ RUN useradd --system --no-create-home --home /opt/genieacs genieacs \
  && mkdir -p /opt/genieacs/ext /var/log/genieacs \
  && chown -R genieacs:genieacs /opt/genieacs /var/log/genieacs
 
-COPY entrypoint.sh /opt/entrypoint.sh
-RUN chmod +x /opt/entrypoint.sh
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
-ENTRYPOINT ["/opt/entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 WORKDIR /opt/genieacs
 
