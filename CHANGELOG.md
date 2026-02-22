@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## Helm Chart [0.2.0] - 2026-02-22
+
+### Added
+- **MongoDB subchart** (Bitnami 18.6.0) as an optional dependency, enabled by default (#33)
+- **`ingressClassName`** support for clusters with multiple ingress controllers (#33)
+- **`envFrom`** support for injecting env vars from Kubernetes Secrets/ConfigMaps (#33)
+- **`extraEnvVars`** support for env vars with `valueFrom` (e.g. secretKeyRef) (#33)
+- **`externalMongodb.url`** for bring-your-own MongoDB deployments (#33)
+
+### Fixed
+- Ingress backend now references the correct service name (`*-http`) (#33)
+- `appVersion` in Chart.yaml now matches the image tag (1.2.13.4)
+
+### Changed
+- Removed redundant `restartPolicy: Always` from Deployment template
+
+### Contributors
+- Thanks to [@ggiesen](https://github.com/ggiesen) for reporting and proposing fixes (#33)
+
 ## [1.2.13.4] - 2026-02-20
 
 ### Added

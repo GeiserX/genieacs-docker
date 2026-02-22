@@ -27,13 +27,24 @@ spec:
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          {{- with .Values.envFrom }}
+          envFrom:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           env:
             {{- range $key, $value := .Values.env }}
             - name: {{ $key }}
               value: "{{ $value }}"
             {{- end }}
             - name: GENIEACS_MONGODB_CONNECTION_URL
-              value: "{{ .Values.mongodb.connectionURL | default (printf "mongodb://%s-mongodb/%s" (include "genieacs.fullname" .) "genieacs") }}"
+              {{- if .Values.mongodb.enabled }}
+              value: "mongodb://{{ include "genieacs.mongodb.fullname" . }}:27017/genieacs"
+              {{- else }}
+              value: "{{ .Values.externalMongodb.url }}"
+              {{- end }}
+            {{- with .Values.extraEnvVars }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service_http.port_http }}
@@ -92,4 +103,3 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      restartPolicy: Always
