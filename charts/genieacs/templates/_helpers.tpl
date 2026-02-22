@@ -51,6 +51,13 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
+Create the MongoDB subchart service name.
+*/}}
+{{- define "genieacs.mongodb.fullname" -}}
+{{- printf "%s-%s" .Release.Name "mongodb" | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
 Create the name of the service account to use
 */}}
 {{- define "genieacs.serviceAccountName" -}}

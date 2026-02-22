@@ -8,6 +8,9 @@ metadata:
   annotations:
     {{- toYaml .Values.ingress.annotations | nindent 4 }}
 spec:
+  {{- if .Values.ingress.className }}
+  ingressClassName: {{ .Values.ingress.className }}
+  {{- end }}
   {{- if .Values.ingress.tls }}
   tls:
     {{- range .Values.ingress.tls }}
@@ -26,7 +29,7 @@ spec:
             pathType: {{ .pathType }}
             backend:
               service:
-                name: {{ include "genieacs.fullname" $ }}
+                name: {{ include "genieacs.fullname" $ }}-http
                 port:
                   number: {{ $.Values.service_http.port_http }}
           {{- end }}
