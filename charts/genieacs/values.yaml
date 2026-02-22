@@ -23,6 +23,7 @@ service_fs:
 
 ingress:
   enabled: false
+  className: ""
   annotations: {}
   hosts:
     - host: genieacs.local
@@ -40,6 +41,17 @@ env:
   GENIEACS_DEBUG_FILE: /var/log/genieacs/genieacs-debug.yaml
   GENIEACS_EXT_DIR: /opt/genieacs/ext
 
+envFrom: []
+# - secretRef:
+#     name: genieacs-secrets
+
+extraEnvVars: []
+# - name: GENIEACS_UI_JWT_SECRET
+#   valueFrom:
+#     secretKeyRef:
+#       name: genieacs-jwt-secret
+#       key: GENIEACS_UI_JWT_SECRET
+
 resources:
   limits:
     memory: 4Gi
@@ -49,7 +61,15 @@ resources:
 
 mongodb:
   enabled: true
-  connectionURL: ""
+  auth:
+    enabled: false
+  persistence:
+    enabled: true
+    size: 8Gi
+
+# Used when mongodb.enabled is false (bring your own MongoDB)
+externalMongodb:
+  url: ""
 
 persistence:
   enabled: true
