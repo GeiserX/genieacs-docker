@@ -102,8 +102,17 @@ Install GenieACS:
 helm install genieacs genieacs/genieacs \
   --namespace genieacs \
   --create-namespace \
-  --set mongodb.enabled=true \
   --set env.GENIEACS_UI_JWT_SECRET=your-secret-here
+```
+
+This deploys GenieACS with a MongoDB instance included by default. To use an external MongoDB instead:
+
+```bash
+helm install genieacs genieacs/genieacs \
+  --namespace genieacs \
+  --create-namespace \
+  --set mongodb.enabled=false \
+  --set externalMongodb.url=mongodb://your-mongo-host/genieacs
 ```
 
 #### Using Helmfile
@@ -125,13 +134,33 @@ image:
 
 replicaCount: 1
 
+ingress:
+  enabled: false
+  className: ""  # e.g. "nginx", "traefik"
+
 env:
   GENIEACS_UI_JWT_SECRET: changeme
-  GENIEACS_MONGODB_CONNECTION_URL: ""
 
+# Inject env vars from Kubernetes Secrets/ConfigMaps
+envFrom: []
+# - secretRef:
+#     name: genieacs-secrets
+
+# Env vars with valueFrom (e.g. secretKeyRef)
+extraEnvVars: []
+
+# Bitnami MongoDB subchart (deployed alongside GenieACS by default)
 mongodb:
   enabled: true
-  connectionURL: ""
+  auth:
+    enabled: false
+  persistence:
+    enabled: true
+    size: 8Gi
+
+# Used when mongodb.enabled is false
+externalMongodb:
+  url: ""
 
 persistence:
   enabled: true
@@ -167,7 +196,7 @@ For complete configuration options, see [charts/genieacs/values.yaml](charts/gen
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `GENIEACS_MONGODB_CONNECTION_URL` | MongoDB connection string | Required |
+| `GENIEACS_MONGODB_CONNECTION_URL` | MongoDB connection string | Auto-configured when `mongodb.enabled=true` |
 | `GENIEACS_UI_JWT_SECRET` | JWT secret for UI authentication | `changeme` |
 | `GENIEACS_EXT_DIR` | Extension scripts directory | `/opt/genieacs/ext` |
 | `GENIEACS_CWMP_ACCESS_LOG_FILE` | CWMP access log path | `/var/log/genieacs/genieacs-cwmp-access.log` |
@@ -198,6 +227,7 @@ docker buildx build --platform linux/amd64,linux/arm64 \
 - The container runs as a non-root user (`genieacs`)
 - Security contexts are configured in the Helm chart
 - Default JWT secret should be changed in production
+- Use `envFrom` or `extraEnvVars` to inject secrets from Kubernetes Secrets instead of hardcoding in `values.yaml`
 - MongoDB authentication should be enabled for production deployments
 
 ## Troubleshooting
