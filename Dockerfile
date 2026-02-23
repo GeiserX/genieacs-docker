@@ -1,9 +1,9 @@
 # syntax=docker/dockerfile:1
 ############################
-# GenieACS v1.2.13.4 Dockerfile #
+# GenieACS v1.2.13.5 Dockerfile #
 ####################################################################
 # docker buildx build --platform linux/amd64,linux/arm64 \         #
-#   -t drumsergio/genieacs:1.2.13.4 -t drumsergio/genieacs:latest \ #
+#   -t drumsergio/genieacs:1.2.13.5 -t drumsergio/genieacs:latest \ #
 #   --push .                                                       #
 ####################################################################
 FROM node:24-bookworm AS build 
@@ -71,10 +71,10 @@ RUN useradd --system --no-create-home --home /opt/genieacs genieacs \
  && mkdir -p /opt/genieacs/ext /var/log/genieacs \
  && chown -R genieacs:genieacs /opt/genieacs /var/log/genieacs
 
-COPY entrypoint.sh /opt/entrypoint.sh
-RUN chmod +x /opt/entrypoint.sh
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
-ENTRYPOINT ["/opt/entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 WORKDIR /opt/genieacs
 

@@ -24,7 +24,7 @@ This project provides production-ready Docker containers and deployment tools fo
 
 ## Features
 
-- 🐳 **Production-ready Docker images** for GenieACS v1.2.13.4
+- 🐳 **Production-ready Docker images** for GenieACS v1.2.13.5
 - ☸️ **Official Helm chart** for Kubernetes deployments
 - 🔄 **Automated chart releases** via GitHub Actions
 - 🔒 **Security best practices** (non-root user, security contexts, etc.)
@@ -58,7 +58,7 @@ docker run -d \
   -p 3000:3000 \
   -e GENIEACS_MONGODB_CONNECTION_URL=mongodb://your-mongo-host/genieacs \
   -e GENIEACS_UI_JWT_SECRET=your-secret-here \
-  drumsergio/genieacs:1.2.13.4
+  drumsergio/genieacs:1.2.13.5
 ```
 
 ## Deployment Methods
@@ -130,7 +130,7 @@ Key configuration options in `values.yaml`:
 ```yaml
 image:
   repository: drumsergio/genieacs
-  tag: "1.2.13.4"
+  tag: "1.2.13.5"
 
 replicaCount: 1
 
@@ -210,14 +210,14 @@ For complete configuration options, see [charts/genieacs/values.yaml](charts/gen
 To build the Docker image locally:
 
 ```bash
-docker build -t drumsergio/genieacs:1.2.13.4 .
+docker build -t drumsergio/genieacs:1.2.13.5 .
 ```
 
 For multi-architecture builds:
 
 ```bash
 docker buildx build --platform linux/amd64,linux/arm64 \
-  -t drumsergio/genieacs:1.2.13.4 \
+  -t drumsergio/genieacs:1.2.13.5 \
   -t drumsergio/genieacs:latest \
   --push .
 ```
