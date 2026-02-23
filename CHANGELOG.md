@@ -21,6 +21,20 @@ All notable changes to this project will be documented in this file.
 ### Contributors
 - Thanks to [@ggiesen](https://github.com/ggiesen) for reporting and proposing fixes (#33)
 
+## [1.2.13.5] - 2026-02-23
+
+### Fixed
+- **Helm chart**: Fixed `capabilities.drop: ALL` preventing supervisord/gosu from switching users - now adds SETUID/SETGID (#34)
+- **Helm chart**: Fixed PVC mount masking entrypoint by changing mount from `/opt` to `/opt/genieacs/ext` (#35)
+- **Docker image**: Moved entrypoint.sh from `/opt/` to `/usr/local/bin/` to avoid volume mount conflicts
+
+### Changed
+- Helm chart version bumped to 0.2.1
+- Persistence volume now mounts at `/opt/genieacs/ext` (extensions only) instead of entire `/opt` directory
+
+### Contributors
+- Thanks to [@ggiesen](https://github.com/ggiesen) for the detailed bug reports (#34, #35)
+
 ## [1.2.13.4] - 2026-02-20
 
 ### Added
