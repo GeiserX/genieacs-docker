@@ -32,6 +32,24 @@ All notable changes to this project will be documented in this file.
 - Helm chart version bumped to 0.2.1
 - Persistence volume now mounts at `/opt/genieacs/ext` (extensions only) instead of entire `/opt` directory
 
+### Migration Notes (Helm chart 0.2.0 → 0.2.1)
+
+**Breaking change**: The persistence mount path changed from `/opt` to `/opt/genieacs/ext`.
+
+If you have an existing deployment with `persistence.enabled: true` and custom extensions:
+
+1. Backup your extensions:
+   ```bash
+   kubectl cp <namespace>/<pod-name>:/opt/genieacs/ext ./extensions-backup
+   ```
+2. Upgrade the Helm chart to 0.2.1
+3. Restore extensions to the new mount:
+   ```bash
+   kubectl cp ./extensions-backup/. <namespace>/<pod-name>:/opt/genieacs/ext/
+   ```
+
+**Note**: Chart 0.2.0 with image 1.2.13.4 was non-functional due to #35, so most users won't have data to migrate.
+
 ### Contributors
 - Thanks to [@ggiesen](https://github.com/ggiesen) for the detailed bug reports (#34, #35)
 
