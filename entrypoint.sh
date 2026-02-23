@@ -6,12 +6,13 @@
 # pristine copy shipped in the image if the application is missing.
 if [ ! -f /opt/genieacs/package.json ]; then
   echo "entrypoint: seeding /opt/genieacs from /usr/share/genieacs ..."
-  cp -a /usr/share/genieacs /opt/genieacs
+  mkdir -p /opt/genieacs
+  cp -a /usr/share/genieacs/. /opt/genieacs/
 fi
 
 # Ensure the genieacs user owns /opt/genieacs and /var/log/genieacs.
 # Required when the persistent volume (e.g. NFS) does not honour fsGroup.
-chown -R genieacs:genieacs /opt/genieacs /var/log/genieacs
+chown -R genieacs:genieacs /opt/genieacs /var/log/genieacs 2>/dev/null || true
 
 # run cron daemon
 service cron start
