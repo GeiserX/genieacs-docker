@@ -1,5 +1,5 @@
 #!/bin/sh
-# /opt/entrypoint.sh
+# /usr/local/bin/entrypoint.sh
 
 # run cron daemon
 service cron start

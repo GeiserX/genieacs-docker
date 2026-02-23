@@ -80,14 +80,14 @@ spec:
           {{- end }}
           {{- if .Values.persistence.enabled }}
           volumeMounts:
-            - name: opt-volume
-              mountPath: /opt
+            - name: genieacs-ext
+              mountPath: /opt/genieacs/ext
           {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- if .Values.persistence.enabled }}
       volumes:
-        - name: opt-volume
+        - name: genieacs-ext
           persistentVolumeClaim:
             claimName: {{ include "genieacs.fullname" . }}-pvc
       {{- end }}
