@@ -1,7 +1,7 @@
 image:
   repository: drumsergio/genieacs
   pullPolicy: IfNotPresent
-  tag: "1.2.13.5"
+  tag: "1.2.13.6"
 
 replicaCount: 1
 
@@ -88,9 +88,7 @@ serviceAccount:
   name: ""
 
 podSecurityContext:
-  fsGroup: 1000
-  # Note: Container runs as genieacs user (UID 999) by default
-  # Set runAsNonRoot: false if you need to run as root for supervisord
+  fsGroup: 999
   runAsNonRoot: false
   runAsUser: 0
 
