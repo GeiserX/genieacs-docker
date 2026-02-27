@@ -1,9 +1,9 @@
 # syntax=docker/dockerfile:1
 ############################
-# GenieACS v1.2.13.5 Dockerfile #
+# GenieACS v1.2.13.6 Dockerfile #
 ####################################################################
 # docker buildx build --platform linux/amd64,linux/arm64 \         #
-#   -t drumsergio/genieacs:1.2.13.5 -t drumsergio/genieacs:latest \ #
+#   -t drumsergio/genieacs:1.2.13.6 -t drumsergio/genieacs:latest \ #
 #   --push .                                                       #
 ####################################################################
 FROM node:24-bookworm AS build 
@@ -67,7 +67,7 @@ RUN rm -rf /etc/cron.daily/dpkg && rm -rf /etc/cron.daily/apt-compat
 COPY config/genieacs.logrotate /etc/logrotate.d/genieacs
 
 # create runtime user
-RUN useradd --system --no-create-home --home /opt/genieacs genieacs \
+RUN useradd --system --no-create-home --home /opt/genieacs --uid 999 genieacs \
  && mkdir -p /opt/genieacs/ext /var/log/genieacs \
  && chown -R genieacs:genieacs /opt/genieacs /var/log/genieacs
 
