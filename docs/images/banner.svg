@@ -25,52 +25,81 @@
     <line x1="750" y1="0" x2="750" y2="200"/>
   </g>
 
-  <!-- Container/server icon -->
-  <g transform="translate(80, 55)">
-    <!-- Container box -->
-    <rect x="0" y="0" width="80" height="90" rx="6" fill="url(#glow)" stroke="#ffffff" stroke-width="2" opacity="0.9"/>
-    <!-- Container layers -->
-    <line x1="0" y1="30" x2="80" y2="30" stroke="#ffffff" stroke-width="1.5" opacity="0.5"/>
-    <line x1="0" y1="60" x2="80" y2="60" stroke="#ffffff" stroke-width="1.5" opacity="0.5"/>
-    <!-- Status dots -->
-    <circle cx="15" cy="15" r="4" fill="#4CAF50" opacity="0.9"/>
-    <circle cx="15" cy="45" r="4" fill="#4CAF50" opacity="0.7"/>
-    <circle cx="15" cy="75" r="4" fill="#4CAF50" opacity="0.5"/>
-    <!-- Labels -->
-    <rect x="28" y="11" width="38" height="8" rx="2" fill="#ffffff" opacity="0.3"/>
-    <rect x="28" y="41" width="30" height="8" rx="2" fill="#ffffff" opacity="0.25"/>
-    <rect x="28" y="71" width="34" height="8" rx="2" fill="#ffffff" opacity="0.2"/>
-  </g>
+  <!-- Compose stack: 4 service containers + DB -->
+  <g transform="translate(52, 30)">
+    <!-- Connection lines (behind containers) -->
+    <line x1="90" y1="38" x2="110" y2="70" stroke="#ffffff" stroke-width="1.5" opacity="0.25"/>
+    <line x1="90" y1="58" x2="110" y2="70" stroke="#ffffff" stroke-width="1.5" opacity="0.25"/>
+    <line x1="90" y1="98" x2="110" y2="90" stroke="#ffffff" stroke-width="1.5" opacity="0.25"/>
+    <line x1="90" y1="118" x2="110" y2="90" stroke="#ffffff" stroke-width="1.5" opacity="0.25"/>
 
-  <!-- WiFi/signal arcs (from logo) -->
-  <g transform="translate(130, 40)" opacity="0.4">
-    <path d="M0,0 A18,18 0 0,1 12,-12" fill="none" stroke="#4CAF50" stroke-width="3" stroke-linecap="round"/>
-    <path d="M0,0 A30,30 0 0,1 20,-20" fill="none" stroke="#4CAF50" stroke-width="3" stroke-linecap="round"/>
+    <!-- Service containers (left column, stacked) -->
+    <!-- CWMP -->
+    <rect x="0" y="24" width="88" height="28" rx="4" fill="url(#glow)" stroke="#ffffff" stroke-width="1.5" opacity="0.85"/>
+    <circle cx="14" cy="38" r="3.5" fill="#4CAF50" opacity="0.9"/>
+    <text x="24" y="42" font-family="monospace" font-size="10" fill="#ffffff" opacity="0.7">CWMP</text>
+
+    <!-- NBI -->
+    <rect x="0" y="56" width="88" height="28" rx="4" fill="url(#glow)" stroke="#ffffff" stroke-width="1.5" opacity="0.75"/>
+    <circle cx="14" cy="70" r="3.5" fill="#4CAF50" opacity="0.8"/>
+    <text x="24" y="74" font-family="monospace" font-size="10" fill="#ffffff" opacity="0.6">NBI</text>
+
+    <!-- FS -->
+    <rect x="0" y="88" width="88" height="28" rx="4" fill="url(#glow)" stroke="#ffffff" stroke-width="1.5" opacity="0.65"/>
+    <circle cx="14" cy="102" r="3.5" fill="#4CAF50" opacity="0.7"/>
+    <text x="24" y="106" font-family="monospace" font-size="10" fill="#ffffff" opacity="0.5">FS</text>
+
+    <!-- GUI -->
+    <rect x="0" y="120" width="88" height="28" rx="4" fill="url(#glow)" stroke="#ffffff" stroke-width="1.5" opacity="0.55"/>
+    <circle cx="14" cy="134" r="3.5" fill="#4CAF50" opacity="0.6"/>
+    <text x="24" y="138" font-family="monospace" font-size="10" fill="#ffffff" opacity="0.4">GUI</text>
+
+    <!-- MongoDB cylinder (right of stack) -->
+    <g transform="translate(112, 55)">
+      <ellipse cx="18" cy="6" rx="18" ry="6" fill="url(#glow)" stroke="#ffffff" stroke-width="1.5" opacity="0.7"/>
+      <rect x="0" y="6" width="36" height="48" fill="url(#glow)" stroke="none"/>
+      <line x1="0" y1="6" x2="0" y2="54" stroke="#ffffff" stroke-width="1.5" opacity="0.7"/>
+      <line x1="36" y1="6" x2="36" y2="54" stroke="#ffffff" stroke-width="1.5" opacity="0.7"/>
+      <ellipse cx="18" cy="54" rx="18" ry="6" fill="url(#glow)" stroke="#ffffff" stroke-width="1.5" opacity="0.7"/>
+      <ellipse cx="18" cy="24" rx="18" ry="5" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.2"/>
+      <text x="18" y="42" text-anchor="middle" font-family="monospace" font-size="8" fill="#ffffff" opacity="0.4">DB</text>
+    </g>
   </g>
 
   <!-- Title -->
-  <text x="200" y="100" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="44" font-weight="700" fill="#ffffff" letter-spacing="-1">
+  <text x="220" y="95" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="44" font-weight="700" fill="#ffffff" letter-spacing="-1">
     GenieACS Docker
   </text>
 
   <!-- Subtitle -->
-  <text x="202" y="132" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="16" fill="#ffffff" opacity="0.65" letter-spacing="0.3">
+  <text x="222" y="128" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="16" fill="#ffffff" opacity="0.65" letter-spacing="0.3">
     Production-ready containers and Helm charts for TR-069
   </text>
 
-  <!-- Decorative: small router icons on right -->
-  <g transform="translate(760, 60)" opacity="0.15">
-    <rect x="0" y="0" width="40" height="25" rx="4" fill="#ffffff"/>
-    <circle cx="10" cy="12" r="3" fill="#2E7D32"/>
-    <circle cx="20" cy="12" r="3" fill="#2E7D32"/>
-    <rect x="20" y="40" width="40" height="25" rx="4" fill="#ffffff"/>
-    <circle cx="30" cy="52" r="3" fill="#2E7D32"/>
-    <circle cx="40" cy="52" r="3" fill="#2E7D32"/>
-    <rect x="40" y="80" width="40" height="25" rx="4" fill="#ffffff"/>
-    <circle cx="50" cy="92" r="3" fill="#2E7D32"/>
-    <circle cx="60" cy="92" r="3" fill="#2E7D32"/>
-    <!-- Connection lines -->
-    <line x1="20" y1="25" x2="40" y2="40" stroke="#ffffff" stroke-width="1.5"/>
-    <line x1="40" y1="65" x2="60" y2="80" stroke="#ffffff" stroke-width="1.5"/>
+  <!-- Decorative: abstract router/CPE devices on right -->
+  <g transform="translate(740, 40)" opacity="0.18">
+    <!-- Router 1 -->
+    <rect x="0" y="0" width="44" height="26" rx="4" fill="#ffffff"/>
+    <circle cx="12" cy="13" r="3" fill="#2E7D32"/>
+    <circle cx="22" cy="13" r="3" fill="#2E7D32"/>
+    <!-- Antenna -->
+    <line x1="36" y1="0" x2="40" y2="-10" stroke="#ffffff" stroke-width="1.5"/>
+    <!-- Signal arcs -->
+    <path d="M40,-10 A8,8 0 0,1 48,-18" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+    <path d="M40,-10 A14,14 0 0,1 54,-24" fill="none" stroke="#ffffff" stroke-width="1"/>
+
+    <!-- Router 2 -->
+    <rect x="30" y="50" width="44" height="26" rx="4" fill="#ffffff" opacity="0.8"/>
+    <circle cx="42" cy="63" r="3" fill="#2E7D32"/>
+    <circle cx="52" cy="63" r="3" fill="#2E7D32"/>
+
+    <!-- Router 3 -->
+    <rect x="10" y="100" width="44" height="26" rx="4" fill="#ffffff" opacity="0.6"/>
+    <circle cx="22" cy="113" r="3" fill="#2E7D32"/>
+    <circle cx="32" cy="113" r="3" fill="#2E7D32"/>
+
+    <!-- Connection lines between routers -->
+    <line x1="22" y1="26" x2="52" y2="50" stroke="#ffffff" stroke-width="1.5"/>
+    <line x1="52" y1="76" x2="32" y2="100" stroke="#ffffff" stroke-width="1.5"/>
   </g>
 </svg>
