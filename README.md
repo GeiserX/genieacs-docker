@@ -8,8 +8,7 @@
 
 # GenieACS Docker
 
-![Docker Image](https://img.shields.io/docker/pulls/drumsergio/genieacs)  
-[![License](https://img.shields.io/github/license/GeiserX/genieacs-docker)](https://github.com/GeiserX/genieacs-docker/blob/master/LICENSE)
+[![Docker Pulls](https://img.shields.io/docker/pulls/drumsergio/genieacs)](https://hub.docker.com/r/drumsergio/genieacs) [![GitHub Stars](https://img.shields.io/github/stars/GeiserX/genieacs-docker)](https://github.com/GeiserX/genieacs-docker/stargazers) [![License](https://img.shields.io/github/license/GeiserX/genieacs-docker)](https://github.com/GeiserX/genieacs-docker/blob/master/LICENSE)
 
 This project provides production-ready Docker containers and deployment tools for [GenieACS](https://genieacs.com), an open-source implementation of TR-069 ACS (Auto Configuration Server).
 
