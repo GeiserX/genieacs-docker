@@ -2,9 +2,7 @@
   <img src="docs/images/banner.svg" alt="GenieACS Docker banner" width="900"/>
 </p>
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/GeiserX/genieacs-docker/master/extra/logo.png" width="100"/>
-</p>
+<img src="https://raw.githubusercontent.com/GeiserX/genieacs-docker/master/extra/logo.png" width="100"/>
 
 # GenieACS Docker
 
