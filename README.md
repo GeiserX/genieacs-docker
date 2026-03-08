@@ -1,4 +1,10 @@
-<img src="https://github.com/GeiserX/genieacs-docker/blob/master/extra/logo.png" width="100"/>
+<p align="center">
+  <img src="docs/images/banner.svg" alt="GenieACS Docker banner" width="900"/>
+</p>
+
+<p align="center">
+  <img src="https://github.com/GeiserX/genieacs-docker/blob/master/extra/logo.png" width="100"/>
+</p>
 
 # GenieACS Docker
 
