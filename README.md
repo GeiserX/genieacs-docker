@@ -2,13 +2,21 @@
   <img src="docs/images/banner.svg" alt="GenieACS Docker banner" width="900"/>
 </p>
 
-<img src="https://raw.githubusercontent.com/GeiserX/genieacs-docker/master/extra/logo.png" width="100"/>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/GeiserX/genieacs-docker/master/extra/logo.png" width="100"/>
+</p>
 
-# GenieACS Docker
+<h1 align="center">GenieACS Docker</h1>
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/drumsergio/genieacs?style=flat-square&logo=docker)](https://hub.docker.com/r/drumsergio/genieacs) [![GitHub Stars](https://img.shields.io/github/stars/GeiserX/genieacs-docker?style=flat-square&logo=github)](https://github.com/GeiserX/genieacs-docker/stargazers) [![License](https://img.shields.io/github/license/GeiserX/genieacs-docker?style=flat-square)](https://github.com/GeiserX/genieacs-docker/blob/master/LICENSE)
+<p align="center">
+  <a href="https://hub.docker.com/r/drumsergio/genieacs"><img src="https://img.shields.io/docker/pulls/drumsergio/genieacs?style=flat-square&logo=docker" alt="Docker Pulls"></a>
+  <a href="https://github.com/GeiserX/genieacs-docker/stargazers"><img src="https://img.shields.io/github/stars/GeiserX/genieacs-docker?style=flat-square&logo=github" alt="GitHub Stars"></a>
+  <a href="https://github.com/GeiserX/genieacs-docker/blob/master/LICENSE"><img src="https://img.shields.io/github/license/GeiserX/genieacs-docker?style=flat-square" alt="License"></a>
+</p>
 
-This project provides production-ready Docker containers and deployment tools for [GenieACS](https://genieacs.com), an open-source implementation of TR-069 ACS (Auto Configuration Server).
+<p align="center">
+  <strong>Production-ready Docker containers and deployment tools for <a href="https://genieacs.com">GenieACS</a>, an open-source TR-069 ACS.</strong>
+</p>
 
 ## Table of Contents
 
