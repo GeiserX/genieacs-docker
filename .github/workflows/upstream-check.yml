@@ -1,0 +1,81 @@
+name: Check Upstream GenieACS
+
+on:
+  schedule:
+    - cron: '0 8 * * 1' # Weekly on Monday 8 AM UTC
+  workflow_dispatch:
+
+jobs:
+  check-upstream:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check for new upstream version
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          CURRENT=$(grep -oP 'GENIEACS_VERSION=v\K[0-9.]+' Dockerfile)
+          LATEST=$(gh api repos/genieacs/genieacs/releases/latest --jq '.tag_name' | sed 's/^v//')
+          echo "current=${CURRENT}" >> $GITHUB_OUTPUT
+          echo "latest=${LATEST}" >> $GITHUB_OUTPUT
+          if [ "$CURRENT" != "$LATEST" ]; then
+            echo "update_available=true" >> $GITHUB_OUTPUT
+            echo "New upstream version available: ${CURRENT} -> ${LATEST}"
+          else
+            echo "update_available=false" >> $GITHUB_OUTPUT
+            echo "Already on latest upstream version: ${CURRENT}"
+          fi
+
+      - name: Check for existing issue
+        if: steps.check.outputs.update_available == 'true'
+        id: existing
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          COUNT=$(gh issue list --search "Upstream GenieACS v${{ steps.check.outputs.latest }}" --state open --json number --jq 'length')
+          echo "count=${COUNT}" >> $GITHUB_OUTPUT
+
+      - name: Ensure label exists
+        if: steps.check.outputs.update_available == 'true' && steps.existing.outputs.count == '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh label create "upstream-update" --color "0075ca" --description "Upstream version update available" 2>/dev/null || true
+
+      - name: Create upstream update issue
+        if: steps.check.outputs.update_available == 'true' && steps.existing.outputs.count == '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CURRENT: ${{ steps.check.outputs.current }}
+          LATEST: ${{ steps.check.outputs.latest }}
+        run: |
+          cat > /tmp/issue-body.md << EOF
+          A new GenieACS version has been released upstream.
+
+          **Current:** v${CURRENT}
+          **Latest:** v${LATEST}
+
+          ## Update Steps
+
+          1. **Ensure genieacs-services has a matching branch:**
+             - Check if [GeiserX/genieacs-services](https://github.com/GeiserX/genieacs-services) has a \`${LATEST}\` branch
+             - If not, create one based on \`${CURRENT}\` and adapt as needed
+
+          2. **Update Dockerfile** (2 lines):
+             - \`ARG GENIEACS_VERSION=v${CURRENT}\` -> \`ARG GENIEACS_VERSION=v${LATEST}\`
+             - \`--branch ${CURRENT}\` -> \`--branch ${LATEST}\` (services clone line)
+
+          3. **Push to main** — CI will automatically release \`v${LATEST}.0\`
+
+          4. **Post-release** (optional, for repo consistency):
+             - Update \`docker-compose.yml\` image tag
+             - Bump Helm chart \`appVersion\` + \`version\` in \`charts/genieacs/Chart.yaml\`
+
+          [View upstream releases](https://github.com/genieacs/genieacs/releases)
+          EOF
+          gh issue create \
+            --title "Upstream GenieACS v${LATEST} released" \
+            --label "upstream-update" \
+            --body-file /tmp/issue-body.md

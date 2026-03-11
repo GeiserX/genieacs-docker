@@ -1,0 +1,153 @@
+name: CI, Release & Docker Publish
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Dockerfile'
+      - 'entrypoint.sh'
+      - 'config/**'
+      - '.github/workflows/ci.yml'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      version_override:
+        description: 'Override version (e.g., 1.2.14.0). Leave empty for auto-increment.'
+        required: false
+        type: string
+
+env:
+  DOCKER_IMAGE: drumsergio/genieacs
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mongo:
+        image: mongo:8.0
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --eval 'db.runCommand({ping:1})'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          load: true
+          tags: genieacs:test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Smoke test
+        run: |
+          docker run -d --name genieacs --network host \
+            -e GENIEACS_MONGODB_CONNECTION_URL=mongodb://localhost:27017 \
+            genieacs:test
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:3000 > /dev/null 2>&1; then
+              echo "GenieACS UI is responding on port 3000"
+              exit 0
+            fi
+            echo "Waiting for GenieACS to start... ($i/30)"
+            sleep 2
+          done
+          echo "GenieACS failed to start within 60s"
+          docker logs genieacs
+          exit 1
+
+      - name: Cleanup
+        if: always()
+        run: docker rm -f genieacs 2>/dev/null || true
+
+  release:
+    needs: test
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine version
+        id: version
+        run: |
+          if [ -n "${{ inputs.version_override }}" ]; then
+            VERSION="${{ inputs.version_override }}"
+          else
+            UPSTREAM=$(grep -oP 'GENIEACS_VERSION=v\K[0-9.]+' Dockerfile)
+            LATEST_TAG=$(git tag -l "v${UPSTREAM}.*" --sort=-version:refname | head -1)
+            if [ -z "$LATEST_TAG" ]; then
+              PATCH=0
+            else
+              PATCH=$(echo "$LATEST_TAG" | rev | cut -d'.' -f1 | rev)
+              PATCH=$((PATCH + 1))
+            fi
+            VERSION="${UPSTREAM}.${PATCH}"
+          fi
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          echo "tag=v${VERSION}" >> $GITHUB_OUTPUT
+          echo "Releasing version: ${VERSION}"
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log into Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ${{ env.DOCKER_IMAGE }}:${{ steps.version.outputs.version }}
+            ${{ env.DOCKER_IMAGE }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Create tag and release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag "${{ steps.version.outputs.tag }}"
+          git push origin "${{ steps.version.outputs.tag }}"
+          gh release create "${{ steps.version.outputs.tag }}" \
+            --title "${{ steps.version.outputs.tag }}" \
+            --generate-notes
+
+      - name: Update Docker Hub description
+        continue-on-error: true
+        uses: peter-evans/dockerhub-description@v4
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: ${{ env.DOCKER_IMAGE }}
+          short-description: "GenieACS (TR-069 ACS) Docker image with multi-arch support"
+          readme-filepath: ./README.md
