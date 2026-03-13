@@ -1,7 +1,7 @@
 image:
   repository: drumsergio/genieacs
   pullPolicy: IfNotPresent
-  tag: "1.2.13.6"
+  tag: "1.2.14.0"
 
 replicaCount: 1
 

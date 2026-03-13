@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.14.0] - 2026-03-13
+
+### Changed
+- **Upstream GenieACS bumped to v1.2.14** (from v1.2.13)
+- Helm chart version bumped to 0.3.0
+
+### Upstream Changes (GenieACS v1.2.14)
+- **Fix: Prevent UI crash when a malformed URL is sent to the server** — replaced `koa-static` with a custom `koa-send` wrapper that validates paths and catches errors
+- **Fix: Edge-case bugs in `VersionedMap` (de)serialization** — prevents corrupt session state during CWMP parameter revision tracking
+- **Fix: Expression evaluation `covers()` function** — corrected logic for contradictions/tautologies affecting preset precondition evaluation
+- **Fix: Operator precedence bug in `ui/config-functions.ts`** — bitwise shift vs modulo
+- **Dependency modernization** — replaced deprecated `koa-bodyparser`/`koa-router` with `@koa/bodyparser`/`@koa/router`, updated TypeScript to 5.9, esbuild, mithril, and other dependencies
+
 ## Helm Chart [0.2.0] - 2026-02-22
 
 ### Added
