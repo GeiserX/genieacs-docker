@@ -1,9 +1,9 @@
 # syntax=docker/dockerfile:1
 ############################
-# GenieACS v1.2.14.0 Dockerfile #
+# GenieACS v1.2.15.0 Dockerfile #
 ####################################################################
 # docker buildx build --platform linux/amd64,linux/arm64 \         #
-#   -t drumsergio/genieacs:1.2.14.0 -t drumsergio/genieacs:latest \ #
+#   -t drumsergio/genieacs:1.2.15.0 -t drumsergio/genieacs:latest \ #
 #   --push .                                                       #
 ####################################################################
 FROM node:24-bookworm AS build
@@ -16,7 +16,7 @@ RUN apt-get update \
 
 # Install GenieACS
 WORKDIR /opt
-ARG GENIEACS_VERSION=v1.2.14
+ARG GENIEACS_VERSION=v1.2.15
 RUN git clone --depth 1 --single-branch \
       --branch "${GENIEACS_VERSION}" \
       https://github.com/genieacs/genieacs.git
@@ -36,7 +36,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends git ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 WORKDIR /tmp
-RUN git clone --depth 1 --single-branch --branch 1.2.14 \
+RUN git clone --depth 1 --single-branch --branch 1.2.15 \
       https://github.com/GeiserX/genieacs-services.git
 
 ##################################
