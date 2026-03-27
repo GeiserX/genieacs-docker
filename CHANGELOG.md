@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.15.0] - 2026-03-27
+
+### Security
+- **CRITICAL: Fix RCE vulnerability in `/api/ping` endpoint** — follow-up to CVE-2021-46704; `domainToASCII` bypass allowed shell injection via crafted hostnames. Now uses `execFile` instead of `exec` with proper input validation
+
+### Changed
+- **Upstream GenieACS bumped to v1.2.15** (from v1.2.14)
+- Helm chart version bumped to 0.3.1
+
+### Upstream Changes (GenieACS v1.2.15)
+- **Security: Fix RCE in `/api/ping`** — normalized host with `domainToASCII` before validation, added round-trip check with `domainToUnicode`, switched from `exec` to `execFile`, added `--` separator to ping args. Credit: JuHwiSang
+- **Fix: Device IDs with special characters** (`%`) not handled correctly in UI due to Mithril 2.3.8 double-decoding regression — workaround extracts device ID directly from `window.location.hash`
+- **Dependency updates** — `koa-compress`, `@types/mithril`, `yaml` patch bumps
+
 ## [1.2.14.0] - 2026-03-13
 
 ### Changed

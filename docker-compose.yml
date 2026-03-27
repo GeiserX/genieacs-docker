@@ -5,7 +5,7 @@ services:
     depends_on:
       mongo:
         condition: service_healthy
-    image: drumsergio/genieacs:1.2.14.0
+    image: drumsergio/genieacs:1.2.15.0
     restart: unless-stopped
     container_name: genieacs
     environment:
