@@ -6,7 +6,7 @@
 #   -t drumsergio/genieacs:1.2.14.0 -t drumsergio/genieacs:latest \ #
 #   --push .                                                       #
 ####################################################################
-FROM node:25-bookworm AS build 
+FROM node:24-bookworm AS build
 LABEL maintainer="acsdesk@protonmail.com"
 
 # packages needed only to build genieacs
