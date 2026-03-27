@@ -237,6 +237,7 @@ This file should evolve as the project grows:
 - **genieacs-services repo uses per-version branches** (e.g., `1.2.13`). When upstream updates, a new branch must exist in that repo before updating the Dockerfile.
 - **Helm chart versions are independent** from Docker image versions. Always bump both `appVersion` and `version` in `Chart.yaml` when releasing a new chart.
 - **GITHUB_TOKEN commits don't trigger other workflows.** The auto-release in `ci.yml` cannot trigger `release-chart.yml` — Helm chart releases require a separate push.
+- **Always use LTS versions of Node.js (even-numbered: 22, 24, 26…).** Odd-numbered "Current" releases (23, 25, 27…) can break the multi-stage build because their runtime binaries may require shared libraries not present in `debian:bookworm-slim`. Dependabot is configured to ignore major Node version bumps to prevent this.
 
 ## Security Notice
 
