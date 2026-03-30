@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.16.0] - 2026-03-29
+
+### Changed
+- **Upstream GenieACS bumped to v1.2.16** (from v1.2.15)
+- Helm chart version bumped to 0.3.2
+
+### Upstream Changes (GenieACS v1.2.16)
+- **Fix: Device search component broken in UI** — reverted Mithril.js from v2.3.8 back to v2.2.2 due to unresolved upstream regressions that broke device search and ID parsing
+- Removed the v1.2.15 workaround for Mithril double-decoding (no longer needed after revert)
+
 ## [1.2.15.0] - 2026-03-27
 
 ### Security
