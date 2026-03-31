@@ -277,12 +277,20 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 GenieACS-Docker follows the [Contributor Covenant](http://contributor-covenant.org/version/2/1/) Code of Conduct.
 
+## GenieACS Ecosystem
+
+This image is part of a broader set of tools for working with GenieACS:
+
+| Project | Description |
+|---------|-------------|
+| [genieacs-mcp](https://github.com/GeiserX/genieacs-mcp) | MCP Server (Go) for AI/LLM integration with GenieACS |
+| [genieacs-sim-docker](https://github.com/GeiserX/genieacs-sim-docker) | Containerised GenieACS Simulator for testing and development |
+| [genieacs-services](https://github.com/GeiserX/genieacs-services) | Systemd & Supervisord service files for bare-metal installs |
+| [genieacs-ha](https://github.com/GeiserX/genieacs-ha) | Home Assistant integration for TR-069 router management |
+
+> The simulator is also available as an optional Docker Compose profile in this repo (`--profile testing`).
+
 ## License
 
 This project is licensed under the same license as GenieACS. See [LICENSE](LICENSE) file for details.
 
-## Related Projects
-
-- [GenieACS](https://github.com/genieacs/genieacs) - The main GenieACS project
-- [GenieACS Services](https://github.com/GeiserX/genieacs-services) - Service configuration files
-- [GenieACS MCP](https://github.com/GeiserX/genieacs-mcp) - MCP server for LLM integration with GenieACS
