@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## Helm Chart [0.3.3] - 2026-03-31
+
+### Fixed
+- **Helm chart: Authenticated bundled MongoDB now works** — when `mongodb.auth.enabled=true`, the chart auto-constructs an authenticated URI using the root password from the Bitnami subchart secret via Kubernetes env var expansion (#48)
+- **docker-compose.yml: Production auth path no longer breaks** — added commented authenticated `GENIEACS_MONGODB_CONNECTION_URL` matching the commented Mongo auth env vars, and cross-referenced the two sections
+- **examples/: Updated to current chart** — removed obsolete pre-0.2.0 standalone MongoDB examples; helmfile.yaml now uses chart 0.3.x with bundled subchart; added `genieacs-secrets.yaml` for credential management
+- **examples/README.md: Fixed secret name mismatch** — previously told users to create `mongodb-secret` while values expected `genieacs-mongo`
+- **README.md: Fixed `master` → `main` references** — logo image URL and LICENSE badge now point to `main` branch
+- **Issue templates: Fixed stale Helm chart link** — `tree/master/helm` → `tree/main/charts/genieacs`
+
 ## [1.2.16.0] - 2026-03-29
 
 ### Changed

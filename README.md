@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/GeiserX/genieacs-docker/master/extra/logo.png" width="100"/>
+  <img src="https://raw.githubusercontent.com/GeiserX/genieacs-docker/main/extra/logo.png" width="100"/>
 </p>
 
 <h1 align="center">GenieACS Docker</h1>
@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://hub.docker.com/r/drumsergio/genieacs"><img src="https://img.shields.io/docker/pulls/drumsergio/genieacs?style=flat-square&logo=docker" alt="Docker Pulls"></a>
   <a href="https://github.com/GeiserX/genieacs-docker/stargazers"><img src="https://img.shields.io/github/stars/GeiserX/genieacs-docker?style=flat-square&logo=github" alt="GitHub Stars"></a>
-  <a href="https://github.com/GeiserX/genieacs-docker/blob/master/LICENSE"><img src="https://img.shields.io/github/license/GeiserX/genieacs-docker?style=flat-square" alt="License"></a>
+  <a href="https://github.com/GeiserX/genieacs-docker/blob/main/LICENSE"><img src="https://img.shields.io/github/license/GeiserX/genieacs-docker?style=flat-square" alt="License"></a>
 </p>
 
 <p align="center">
@@ -116,7 +116,18 @@ helm install genieacs genieacs/genieacs \
   --set env.GENIEACS_UI_JWT_SECRET=your-secret-here
 ```
 
-This deploys GenieACS with a MongoDB instance included by default. To use an external MongoDB instead:
+This deploys GenieACS with a MongoDB instance included by default (no auth). For production with MongoDB auth:
+
+```bash
+helm install genieacs genieacs/genieacs \
+  --namespace genieacs \
+  --create-namespace \
+  --set mongodb.auth.enabled=true \
+  --set mongodb.auth.rootPassword=your-secure-password \
+  --set env.GENIEACS_UI_JWT_SECRET=your-secret-here
+```
+
+To use an external MongoDB instead:
 
 ```bash
 helm install genieacs genieacs/genieacs \

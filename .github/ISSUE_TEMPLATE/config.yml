@@ -7,7 +7,7 @@ contact_links:
     url: https://hub.docker.com/r/drumsergio/genieacs
     about: Get the latest Docker image
   - name: ⎈ Helm Chart
-    url: https://github.com/GeiserX/genieacs-docker/tree/master/helm
+    url: https://github.com/GeiserX/genieacs-docker/tree/main/charts/genieacs
     about: Kubernetes deployment with Helm
   - name: 📚 Official GenieACS Wiki
     url: https://github.com/genieacs/genieacs/wiki

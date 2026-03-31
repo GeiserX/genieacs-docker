@@ -36,12 +36,21 @@ spec:
             - name: {{ $key }}
               value: "{{ $value }}"
             {{- end }}
+            {{- if and .Values.mongodb.enabled .Values.mongodb.auth.enabled }}
+            - name: MONGODB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "genieacs.mongodb.fullname" . }}
+                  key: mongodb-root-password
             - name: GENIEACS_MONGODB_CONNECTION_URL
-              {{- if .Values.mongodb.enabled }}
+              value: "mongodb://root:$(MONGODB_ROOT_PASSWORD)@{{ include "genieacs.mongodb.fullname" . }}:27017/genieacs?authSource=admin"
+            {{- else if .Values.mongodb.enabled }}
+            - name: GENIEACS_MONGODB_CONNECTION_URL
               value: "mongodb://{{ include "genieacs.mongodb.fullname" . }}:27017/genieacs"
-              {{- else }}
+            {{- else if .Values.externalMongodb.url }}
+            - name: GENIEACS_MONGODB_CONNECTION_URL
               value: "{{ .Values.externalMongodb.url }}"
-              {{- end }}
+            {{- end }}
             {{- with .Values.extraEnvVars }}
             {{- toYaml . | nindent 12 }}
             {{- end }}

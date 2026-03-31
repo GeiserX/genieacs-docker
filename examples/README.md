@@ -1,13 +1,10 @@
 # GenieACS Deployment Examples
 
-This directory contains example deployment configurations for GenieACS.
+This directory contains example deployment configurations for GenieACS using the current Helm chart (v0.3.x).
 
 ## Helmfile Example
 
-The `helmfile.yaml` demonstrates how to deploy GenieACS on Kubernetes using Helmfile with:
-
-- Bitnami MongoDB chart
-- GenieACS Helm chart from the official repository
+The `helmfile.yaml` demonstrates how to deploy GenieACS on Kubernetes using [Helmfile](https://github.com/helmfile/helmfile) with the bundled MongoDB subchart.
 
 ### Prerequisites
 
@@ -15,25 +12,21 @@ The `helmfile.yaml` demonstrates how to deploy GenieACS on Kubernetes using Helm
 - `helm` CLI installed
 - `helmfile` CLI installed ([installation guide](https://helmfile.readthedocs.io/en/latest/#installation))
 
+### Files
+
+| File | Description |
+|------|-------------|
+| `helmfile.yaml` | Main Helmfile configuration (chart repo + release) |
+| `genieacs.yaml` | GenieACS chart values (MongoDB auth enabled) |
+| `genieacs-secrets.yaml` | Secrets (MongoDB root password) — do NOT commit real values |
+
 ### Usage
 
-1. Review and customize the configuration files:
-   - `helmfile.yaml` - Main Helmfile configuration
-   - `genieacs.yaml` - GenieACS chart values
-   - `mongo.yaml` - MongoDB chart values
-   - `mongo-secret.yaml` - MongoDB credentials (create this file)
+1. Review and customize the configuration files.
 
-2. Create the MongoDB secret (if using authentication):
+2. Set your MongoDB root password in `genieacs-secrets.yaml` (or use [helm-secrets](https://github.com/jkroepke/helm-secrets) for encryption).
 
-```bash
-kubectl create namespace genieacs
-kubectl create secret generic mongodb-secret \
-  --from-literal=username=admin \
-  --from-literal=password=your-secure-password \
-  -n genieacs
-```
-
-3. Deploy using Helmfile:
+3. Deploy:
 
 ```bash
 helmfile -f helmfile.yaml apply
@@ -46,7 +39,7 @@ kubectl get pods -n genieacs
 kubectl get services -n genieacs
 ```
 
-5. Access GenieACS UI (using port-forward):
+5. Access GenieACS UI:
 
 ```bash
 kubectl port-forward -n genieacs svc/genieacs-http 3000:3000
@@ -54,21 +47,14 @@ kubectl port-forward -n genieacs svc/genieacs-http 3000:3000
 
 Then open http://localhost:3000 in your browser.
 
-### Configuration
+### External MongoDB
 
-The example uses the official GenieACS Helm chart repository:
-
-```yaml
-repositories:
-  - name: genieacs
-    url: https://geiserx.github.io/genieacs-docker
-```
-
-To use a local chart, modify the `helmfile.yaml` to point to the local chart path:
+To use your own MongoDB instead of the bundled subchart, set in `genieacs.yaml`:
 
 ```yaml
-releases:
-  - name: genieacs
-    chart: ../../charts/genieacs
-```
+mongodb:
+  enabled: false
 
+externalMongodb:
+  url: "mongodb://user:password@your-mongo-host:27017/genieacs?authSource=admin"
+```

@@ -1,2 +1,14 @@
----
-# Check ../charts/genieacs/values.yaml in the chart
+# GenieACS Helm chart values
+# See charts/genieacs/values.yaml for all options
+
+env:
+  GENIEACS_UI_JWT_SECRET: changeme  # Override via genieacs-secrets.yaml
+
+# Bundled MongoDB (Bitnami subchart)
+mongodb:
+  enabled: true
+  auth:
+    enabled: true
+  persistence:
+    enabled: true
+    size: 8Gi
