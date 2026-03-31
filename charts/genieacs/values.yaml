@@ -63,10 +63,12 @@ mongodb:
   enabled: true
   auth:
     enabled: false
-    # When auth.enabled is true, the chart auto-constructs an authenticated
-    # MongoDB URI using the root password from the Bitnami subchart secret.
-    # Set rootPassword here or let the subchart auto-generate one:
+    # When auth.enabled is true, the chart auto-constructs an authenticated URI.
+    # If rootPassword is set here, the password is URL-encoded at template time
+    # (safe for special characters like @, :, /, %). If left empty, the subchart
+    # auto-generates an alphanumeric password resolved at runtime via secretKeyRef.
     # rootPassword: ""
+    # existingSecret: ""  # Use a pre-existing secret instead of the subchart's
   persistence:
     enabled: true
     size: 8Gi

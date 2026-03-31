@@ -7,10 +7,9 @@ releases:
     namespace: genieacs
     chart: genieacs/genieacs
     # renovate: registryUrl=https://geiserx.github.io/genieacs-docker
-    version: 0.3.3
+    version: 0.3.4
     labels:
       app: genieacs
     values:
       - genieacs.yaml
-    secrets:
       - genieacs-secrets.yaml
