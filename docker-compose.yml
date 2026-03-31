@@ -16,6 +16,8 @@ services:
       GENIEACS_UI_ACCESS_LOG_FILE: /var/log/genieacs/genieacs-ui-access.log
       GENIEACS_DEBUG_FILE: /var/log/genieacs/genieacs-debug.yaml
       GENIEACS_EXT_DIR: /opt/genieacs/ext
+      # For production with auth enabled, use:
+      # GENIEACS_MONGODB_CONNECTION_URL: mongodb://root:passwordchange@mongo/genieacs?authSource=admin
       GENIEACS_MONGODB_CONNECTION_URL: mongodb://mongo/genieacs?authSource=admin
     ports:
       - "7547:7547"
@@ -39,8 +41,8 @@ services:
     restart: unless-stopped
     container_name: mongo-genieacs
     environment:
-      # Uncomment and set these for production use
-      # MONGO_INITDB_ROOT_USERNAME: userchange
+      # Uncomment for production use (must also update GENIEACS_MONGODB_CONNECTION_URL above)
+      # MONGO_INITDB_ROOT_USERNAME: root
       # MONGO_INITDB_ROOT_PASSWORD: passwordchange
       MONGO_DATA_DIR: /data/db
       MONGO_LOG_DIR: /var/log/mongodb
