@@ -18,13 +18,13 @@ The `helmfile.yaml` demonstrates how to deploy GenieACS on Kubernetes using [Hel
 |------|-------------|
 | `helmfile.yaml` | Main Helmfile configuration (chart repo + release) |
 | `genieacs.yaml` | GenieACS chart values (MongoDB auth enabled) |
-| `genieacs-secrets.yaml` | Secrets (MongoDB root password) — do NOT commit real values |
+| `genieacs-secrets.yaml` | MongoDB root password — do NOT commit real values (use [helm-secrets](https://github.com/jkroepke/helm-secrets) for encryption in production) |
 
 ### Usage
 
 1. Review and customize the configuration files.
 
-2. Set your MongoDB root password in `genieacs-secrets.yaml` (or use [helm-secrets](https://github.com/jkroepke/helm-secrets) for encryption).
+2. Set your MongoDB root password in `genieacs-secrets.yaml`.
 
 3. Deploy:
 
