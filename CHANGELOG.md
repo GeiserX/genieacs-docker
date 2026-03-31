@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## Helm Chart [0.3.4] - 2026-03-31
+
+### Fixed
+- **Fix: URL-encode MongoDB passwords with special characters** — when `rootPassword` is set in values, the password is now percent-encoded at template time via `urlquery`, so characters like `@`, `:`, `/`, `%` no longer break the connection URI. Auto-generated passwords (empty `rootPassword`) continue to use runtime `$(VAR)` expansion (Bitnami generates alphanumeric passwords)
+- **Fix: Respect `mongodb.fullnameOverride` and `mongodb.auth.existingSecret`** — the chart now resolves the correct MongoDB service name and secret name when users override the subchart's default naming
+- **Fix: Remove undeclared `helm-secrets` plugin dependency from examples** — `genieacs-secrets.yaml` moved from Helmfile `secrets:` to `values:` so examples work without plugins
+
 ## Helm Chart [0.3.3] - 2026-03-31
 
 ### Fixed

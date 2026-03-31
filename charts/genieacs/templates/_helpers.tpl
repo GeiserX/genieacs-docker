@@ -52,9 +52,26 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 
 {{/*
 Create the MongoDB subchart service name.
+Respects mongodb.fullnameOverride when set.
 */}}
 {{- define "genieacs.mongodb.fullname" -}}
+{{- if .Values.mongodb.fullnameOverride -}}
+{{- .Values.mongodb.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
 {{- printf "%s-%s" .Release.Name "mongodb" | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Resolve the MongoDB secret name.
+Uses mongodb.auth.existingSecret when set, otherwise the subchart's auto-generated secret.
+*/}}
+{{- define "genieacs.mongodb.secretName" -}}
+{{- if .Values.mongodb.auth.existingSecret -}}
+{{- .Values.mongodb.auth.existingSecret -}}
+{{- else -}}
+{{- include "genieacs.mongodb.fullname" . -}}
+{{- end -}}
 {{- end -}}
 
 {{/*
