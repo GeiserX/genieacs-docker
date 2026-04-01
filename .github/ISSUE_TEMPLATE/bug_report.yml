@@ -21,7 +21,7 @@ body:
     id: deployment
     attributes:
       label: Deployment Method
-      description: How are you running genieacs-docker?
+      description: How are you running genieacs-container?
       options:
         - Docker Compose
         - Docker (standalone)

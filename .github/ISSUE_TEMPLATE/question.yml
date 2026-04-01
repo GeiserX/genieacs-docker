@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Have a question? We're here to help! Please check the [README](https://github.com/GeiserX/genieacs-docker#readme) and [GenieACS Wiki](https://github.com/genieacs/genieacs/wiki) first.
+        Have a question? We're here to help! Please check the [README](https://github.com/GeiserX/genieacs-container#readme) and [GenieACS Wiki](https://github.com/genieacs/genieacs/wiki) first.
 
   - type: dropdown
     id: topic
@@ -59,7 +59,7 @@ body:
     attributes:
       label: Checklist
       options:
-        - label: I have read the [README](https://github.com/GeiserX/genieacs-docker#readme)
+        - label: I have read the [README](https://github.com/GeiserX/genieacs-container#readme)
           required: true
         - label: I have searched existing issues for similar questions
           required: true

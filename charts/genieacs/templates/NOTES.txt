@@ -20,4 +20,4 @@ GenieACS has been deployed successfully!
 
 2. Ensure that the MongoDB database is running and accessible. If you enabled the bundled MongoDB chart, it should be running within your cluster.
 
-3. For further configuration and customization, refer to the GenieACS Docker documentation and modify the `values.yaml` as needed.
+3. For further configuration and customization, refer to the GenieACS Container documentation and modify the `values.yaml` as needed.

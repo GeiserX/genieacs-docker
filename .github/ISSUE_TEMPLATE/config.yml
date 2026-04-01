@@ -1,13 +1,13 @@
 blank_issues_enabled: false
 contact_links:
   - name: 📖 Documentation
-    url: https://github.com/GeiserX/genieacs-docker#readme
+    url: https://github.com/GeiserX/genieacs-container#readme
     about: Check the README for setup instructions and configuration options
   - name: 🐳 Docker Hub
     url: https://hub.docker.com/r/drumsergio/genieacs
     about: Get the latest Docker image
   - name: ⎈ Helm Chart
-    url: https://github.com/GeiserX/genieacs-docker/tree/main/charts/genieacs
+    url: https://github.com/GeiserX/genieacs-container/tree/main/charts/genieacs
     about: Kubernetes deployment with Helm
   - name: 📚 Official GenieACS Wiki
     url: https://github.com/genieacs/genieacs/wiki

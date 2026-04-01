@@ -68,7 +68,7 @@
 
   <!-- Title — vertically centered with subtitle as a pair -->
   <text x="220" y="92" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="44" font-weight="700" fill="#ffffff" letter-spacing="-1">
-    GenieACS Docker
+    GenieACS Container
   </text>
 
   <!-- Subtitle -->

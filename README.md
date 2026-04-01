@@ -1,17 +1,17 @@
 <p align="center">
-  <img src="docs/images/banner.svg" alt="GenieACS Docker banner" width="900"/>
+  <img src="docs/images/banner.svg" alt="GenieACS Container banner" width="900"/>
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/GeiserX/genieacs-docker/main/extra/logo.png" width="100"/>
+  <img src="https://raw.githubusercontent.com/GeiserX/genieacs-container/main/extra/logo.png" width="100"/>
 </p>
 
-<h1 align="center">GenieACS Docker</h1>
+<h1 align="center">GenieACS Container</h1>
 
 <p align="center">
   <a href="https://hub.docker.com/r/drumsergio/genieacs"><img src="https://img.shields.io/docker/pulls/drumsergio/genieacs?style=flat-square&logo=docker" alt="Docker Pulls"></a>
-  <a href="https://github.com/GeiserX/genieacs-docker/stargazers"><img src="https://img.shields.io/github/stars/GeiserX/genieacs-docker?style=flat-square&logo=github" alt="GitHub Stars"></a>
-  <a href="https://github.com/GeiserX/genieacs-docker/blob/main/LICENSE"><img src="https://img.shields.io/github/license/GeiserX/genieacs-docker?style=flat-square" alt="License"></a>
+  <a href="https://github.com/GeiserX/genieacs-container/stargazers"><img src="https://img.shields.io/github/stars/GeiserX/genieacs-container?style=flat-square&logo=github" alt="GitHub Stars"></a>
+  <a href="https://github.com/GeiserX/genieacs-container/blob/main/LICENSE"><img src="https://img.shields.io/github/license/GeiserX/genieacs-container?style=flat-square" alt="License"></a>
 </p>
 
 <p align="center">
@@ -103,7 +103,7 @@ docker compose down -v
 Add the chart repository:
 
 ```bash
-helm repo add genieacs https://geiserx.github.io/genieacs-docker
+helm repo add genieacs https://geiserx.github.io/genieacs-container
 helm repo update
 ```
 
@@ -286,7 +286,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-GenieACS-Docker follows the [Contributor Covenant](http://contributor-covenant.org/version/2/1/) Code of Conduct.
+GenieACS-Container follows the [Contributor Covenant](http://contributor-covenant.org/version/2/1/) Code of Conduct.
 
 ## GenieACS Ecosystem
 

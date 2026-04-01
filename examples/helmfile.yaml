@@ -1,12 +1,12 @@
 repositories:
   - name: genieacs
-    url: https://geiserx.github.io/genieacs-docker
+    url: https://geiserx.github.io/genieacs-container
 
 releases:
   - name: genieacs
     namespace: genieacs
     chart: genieacs/genieacs
-    # renovate: registryUrl=https://geiserx.github.io/genieacs-docker
+    # renovate: registryUrl=https://geiserx.github.io/genieacs-container
     version: 0.3.4
     labels:
       app: genieacs

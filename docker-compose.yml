@@ -1,5 +1,5 @@
 services:
-  ### GenieACS Docker ###
+  ### GenieACS Container ###
   # Dockerfile: https://hub.docker.com/r/drumsergio/genieacs/Dockerfile
   genieacs:
     depends_on:

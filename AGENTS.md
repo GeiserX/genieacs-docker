@@ -1,10 +1,10 @@
-# genieacs-docker - AI Assistant Configuration
+# genieacs-container - AI Assistant Configuration
 
 > **Project Context:** This is an open-source project (110+ stars). Consider community guidelines and contribution standards.
 
 ## Persona
 
-You assist developers working on genieacs-docker.
+You assist developers working on genieacs-container.
 
 Project description: Production-ready Docker image and Helm chart for [GenieACS](https://genieacs.com), an open-source TR-069 (CWMP) Auto Configuration Server. Multi-arch (amd64/arm64), non-root runtime, integrated log rotation, supervisord process management.
 
@@ -21,13 +21,13 @@ Project description: Production-ready Docker image and Helm chart for [GenieACS]
 
 ## Repository & Infrastructure
 
-- **Host:** GitHub ([GeiserX/genieacs-docker](https://github.com/GeiserX/genieacs-docker))
+- **Host:** GitHub ([GeiserX/genieacs-container](https://github.com/GeiserX/genieacs-container))
 - **License:** GPL-3.0
 - **Commits:** Follow [Conventional Commits](https://conventionalcommits.org) format
 - **Versioning:** Custom 4-part scheme — see [Versioning Scheme](#versioning-scheme) below
 - **CI/CD:** GitHub Actions (`ci.yml` for Docker, `release-chart.yml` for Helm, `upstream-check.yml` for monitoring)
 - **Docker Image:** `drumsergio/genieacs` on Docker Hub
-- **Helm Repo:** `https://geiserx.github.io/genieacs-docker` (GitHub Pages)
+- **Helm Repo:** `https://geiserx.github.io/genieacs-container` (GitHub Pages)
 - **Upstream:** [genieacs/genieacs](https://github.com/genieacs/genieacs) on GitHub
 - **Services config:** [GeiserX/genieacs-services](https://github.com/GeiserX/genieacs-services) (supervisord config, per-version branches)
 - **Related:** [GeiserX/genieacs-mcp](https://github.com/GeiserX/genieacs-mcp) (MCP server for AI integration)
