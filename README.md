@@ -31,6 +31,8 @@
 - [Environment Variables](#environment-variables)
 - [Maintainers](#maintainers)
 - [Contributing](#contributing)
+- [GenieACS Ecosystem](#genieacs-ecosystem)
+- [Related ISP Tools](#related-isp-tools)
 - [License](#license)
 
 ## Features
@@ -292,14 +294,22 @@ GenieACS-Container follows the [Contributor Covenant](http://contributor-covenan
 
 This image is part of a broader set of tools for working with GenieACS:
 
-| Project | Description |
-|---------|-------------|
-| [genieacs-mcp](https://github.com/GeiserX/genieacs-mcp) | MCP Server (Go) for AI/LLM integration with GenieACS |
-| [genieacs-sim-docker](https://github.com/GeiserX/genieacs-sim-docker) | Containerised GenieACS Simulator for testing and development |
-| [genieacs-services](https://github.com/GeiserX/genieacs-services) | Systemd & Supervisord service files for bare-metal installs |
-| [genieacs-ha](https://github.com/GeiserX/genieacs-ha) | Home Assistant integration for TR-069 router management |
+| Project | Type | Description |
+|---------|------|-------------|
+| [genieacs-mcp](https://github.com/GeiserX/genieacs-mcp) | MCP Server | AI-assisted device management via MCP |
+| [genieacs-ha](https://github.com/GeiserX/genieacs-ha) | HA Integration | Home Assistant integration for TR-069 monitoring |
+| [n8n-nodes-genieacs](https://github.com/GeiserX/n8n-nodes-genieacs) | n8n Node | Workflow automation for GenieACS |
+| [genieacs-services](https://github.com/GeiserX/genieacs-services) | Service Defs | Systemd/Supervisord service definitions |
+| [genieacs-sim-docker](https://github.com/GeiserX/genieacs-sim-docker) | Simulator | Docker-based GenieACS simulator for testing |
 
 > The simulator is also available as an optional Docker Compose profile in this repo (`--profile testing`).
+
+## Related ISP Tools
+
+- [router-express](https://github.com/GeiserX/router-express) — Auto-configure routers and sync databases
+- [services-isp](https://github.com/GeiserX/services-isp) — Automate common ISP operational tasks
+- [statix](https://github.com/GeiserX/statix) — Real-time ISP network statistics dashboard
+- [ScriptPoblar](https://github.com/GeiserX/ScriptPoblar) — Batch device provisioning and CRM operations
 
 ## License
 
