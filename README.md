@@ -296,6 +296,7 @@ This image is part of a broader set of tools for working with GenieACS:
 
 | Project | Type | Description |
 |---------|------|-------------|
+| [genieacs-ansible](https://github.com/GeiserX/genieacs-ansible) | Ansible Collection | Dynamic inventory plugin and device management modules |
 | [genieacs-mcp](https://github.com/GeiserX/genieacs-mcp) | MCP Server | AI-assisted device management via MCP |
 | [genieacs-ha](https://github.com/GeiserX/genieacs-ha) | HA Integration | Home Assistant integration for TR-069 monitoring |
 | [n8n-nodes-genieacs](https://github.com/GeiserX/n8n-nodes-genieacs) | n8n Node | Workflow automation for GenieACS |
