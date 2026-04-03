@@ -1,0 +1,56 @@
+language: "en-US"
+tone_instructions: "Be direct and concise. No fluff."
+
+reviews:
+  profile: "chill"
+  high_level_summary: true
+  collapse_walkthrough: true
+  poem: false
+  sequence_diagrams: false
+  suggested_reviewers: false
+  auto_review:
+    enabled: true
+    drafts: false
+    ignore_title_keywords:
+      - "WIP"
+      - "DO NOT REVIEW"
+  path_instructions:
+    - path: "Dockerfile*"
+      instructions: |
+        Verify multi-stage builds are used. Check for non-root USER.
+        Ensure base image tags are pinned, not :latest.
+    - path: "charts/**"
+      instructions: |
+        Validate that all values referenced in templates have defaults in values.yaml.
+        Check resource limits and requests are templated, not hardcoded.
+        Ensure sensitive values use Kubernetes Secrets, not ConfigMaps.
+    - path: "entrypoint*.sh"
+      instructions: |
+        Check for proper error handling (set -e, trap).
+        Verify environment variable defaults are safe.
+        Ensure no secrets are echoed or logged.
+  tools:
+    gitleaks:
+      enabled: true
+    hadolint:
+      enabled: true
+    actionlint:
+      enabled: true
+    yamllint:
+      enabled: true
+    markdownlint:
+      enabled: true
+    shellcheck:
+      enabled: true
+
+chat:
+  auto_reply: true
+
+knowledge_base:
+  learnings:
+    scope: "local"
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - "AGENTS.md"
+      - "CLAUDE.md"
