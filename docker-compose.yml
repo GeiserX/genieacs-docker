@@ -61,12 +61,12 @@ services:
       start_period: 40s
 
   ### THIS SERVICE IS JUST FOR TESTING ###
-  # Dockerfile here: https://hub.docker.com/r/drumsergio/genieacs-sim/Dockerfile
+  # Dockerfile here: https://hub.docker.com/r/drumsergio/genieacs-sim-container/Dockerfile
   genieacs-sim:
     depends_on:
       genieacs:
         condition: service_healthy
-    image: drumsergio/genieacs-sim:latest
+    image: drumsergio/genieacs-sim-container:latest
     container_name: genieacs-sim
     restart: unless-stopped
     networks:
