@@ -1,0 +1,11 @@
+description: "The original and most popular Helm Chart and Docker container for GenieACS, an open-source TR-069 ACS (Auto Configuration Server)."
+personalNote: "Currently used by thousands of ISPs around the world. Still, I feel nostalgic when thinking about my journey with it: I was the first person to create a fully working guide for Ubuntu installation in 2015, the first to run GenieACS dockerized back in 2016, and the first to run GenieACS in CentOS-based distros, which was a requirement for one of my clients back then."
+dockerImage: "drumsergio/genieacs"
+keyFeatures:
+  - "Production-ready Docker images for GenieACS"
+  - "Official Helm chart for Kubernetes deployments"
+  - "Automated chart releases via GitHub Actions"
+  - "Security best practices with non-root user"
+  - "Health checks and monitoring support"
+  - "Multi-architecture support (amd64, arm64)"
+techStack: "Docker, Kubernetes, Helm"
