@@ -181,6 +181,12 @@
       "properties": {
         "url": {
           "type": "string"
+        },
+        "existingSecret": {
+          "type": "string"
+        },
+        "secretKey": {
+          "type": "string"
         }
       }
     },
