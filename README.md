@@ -129,7 +129,7 @@ helm install genieacs genieacs/genieacs \
   --set env.GENIEACS_UI_JWT_SECRET=your-secret-here
 ```
 
-To use an external MongoDB instead:
+To use an external MongoDB (connection string inline):
 
 ```bash
 helm install genieacs genieacs/genieacs \
@@ -138,6 +138,35 @@ helm install genieacs genieacs/genieacs \
   --set mongodb.enabled=false \
   --set externalMongodb.url=mongodb://your-mongo-host/genieacs
 ```
+
+To use an external MongoDB with the connection string sourced from a
+Kubernetes Secret (recommended for production — keeps credentials out
+of values files and out of the pod spec):
+
+```bash
+kubectl create secret generic genieacs-mongodb \
+  --namespace genieacs \
+  --from-literal=connectionString="mongodb+srv://user:pass@cluster.example.net/genieacs?retryWrites=true"
+
+helm install genieacs genieacs/genieacs \
+  --namespace genieacs \
+  --create-namespace \
+  --set mongodb.enabled=false \
+  --set externalMongodb.existingSecret=genieacs-mongodb
+```
+
+This pattern integrates with External Secrets Operator, Sealed Secrets,
+Vault, and operators that write connection details to a Kubernetes
+Secret (MongoDB Atlas Operator, MongoDB Controllers for Kubernetes
+(MCK), the Percona Operator).
+
+> **Production note:** The bundled Bitnami MongoDB subchart is intended
+> for development and evaluation only. For production deployments, run
+> MongoDB separately — managed (MongoDB Atlas), operator-managed
+> ([MCK](https://github.com/mongodb/mongodb-kubernetes),
+> [Percona Operator for MongoDB](https://github.com/percona/percona-server-mongodb-operator)),
+> or self-hosted — and point the chart at it using
+> `externalMongodb.existingSecret`.
 
 #### Using Helmfile
 
@@ -182,9 +211,14 @@ mongodb:
     enabled: true
     size: 8Gi
 
-# Used when mongodb.enabled is false
+# Used when mongodb.enabled is false (bring your own MongoDB).
+# Set either `url` directly, or `existingSecret` + `secretKey` to
+# source the connection string from a Kubernetes Secret (recommended
+# for production). If both are set, `existingSecret` takes precedence.
 externalMongodb:
   url: ""
+  existingSecret: ""
+  secretKey: "connectionString"
 
 persistence:
   enabled: true
