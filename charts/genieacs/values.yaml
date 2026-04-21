@@ -73,10 +73,25 @@ mongodb:
     enabled: true
     size: 8Gi
 
-# Used when mongodb.enabled is false (bring your own MongoDB)
-# Must include credentials if the external MongoDB requires auth
+# Used when mongodb.enabled is false (bring your own MongoDB).
+# Recommended for production. The bundled MongoDB subchart is intended
+# for development and evaluation only.
+#
+# Provide connection details either:
+#   a) directly via `url` (connection string includes credentials), or
+#   b) via `existingSecret` + `secretKey`, which reads the connection
+#      string from a Kubernetes Secret at pod start using valueFrom.
+#      This is the right path for production because credentials stay
+#      out of values files and out of the pod spec, and it integrates
+#      with External Secrets Operator, Sealed Secrets, Vault, MongoDB
+#      Atlas Operator, MongoDB Controllers for Kubernetes (MCK), the
+#      Percona Operator, etc.
+#
+# If both are set, `existingSecret` takes precedence.
 externalMongodb:
   url: ""
+  existingSecret: ""
+  secretKey: "connectionString"
 
 persistence:
   enabled: true

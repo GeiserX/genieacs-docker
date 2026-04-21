@@ -52,6 +52,12 @@ spec:
             {{- else if .Values.mongodb.enabled }}
             - name: GENIEACS_MONGODB_CONNECTION_URL
               value: "mongodb://{{ include "genieacs.mongodb.fullname" . }}:27017/genieacs"
+            {{- else if .Values.externalMongodb.existingSecret }}
+            - name: GENIEACS_MONGODB_CONNECTION_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.externalMongodb.existingSecret | quote }}
+                  key: {{ .Values.externalMongodb.secretKey | quote }}
             {{- else if .Values.externalMongodb.url }}
             - name: GENIEACS_MONGODB_CONNECTION_URL
               value: "{{ .Values.externalMongodb.url }}"

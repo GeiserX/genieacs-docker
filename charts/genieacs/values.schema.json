@@ -181,6 +181,17 @@
       "properties": {
         "url": {
           "type": "string"
+        },
+        "existingSecret": {
+          "type": "string",
+          "maxLength": 253,
+          "pattern": "^$|^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$"
+        },
+        "secretKey": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 253,
+          "pattern": "^[-._A-Za-z0-9]+$"
         }
       }
     },
