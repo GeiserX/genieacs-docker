@@ -152,8 +152,7 @@ helm install genieacs genieacs/genieacs \
   --namespace genieacs \
   --create-namespace \
   --set mongodb.enabled=false \
-  --set externalMongodb.existingSecret=genieacs-mongodb \
-  --set externalMongodb.secretKey=connectionString
+  --set externalMongodb.existingSecret=genieacs-mongodb
 ```
 
 This pattern integrates with External Secrets Operator, Sealed Secrets,
