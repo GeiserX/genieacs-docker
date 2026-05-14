@@ -22,7 +22,7 @@ env:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, X64]
     services:
       mongo:
         image: mongo:8.0
@@ -75,7 +75,7 @@ jobs:
   release:
     needs: test
     if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, X64]
     permissions:
       contents: write
       packages: write
